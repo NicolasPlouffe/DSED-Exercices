@@ -5,9 +5,12 @@ namespace M01_DAL_Municipalite_SQLServer;
 
 public class DepotMunicipalitesSQLServer:IDepotMunicipalites
 {
-    
-    
-    public DepotMunicipalitesSQLServer(M)
+
+
+    public DepotMunicipalitesSQLServer()
+    {
+        ;
+    }
     
     public IEnumerable<MunicipaliteEntite> ChercherMunicipaliteParCodeGeographique(int p_municipaliteCodeGeographique)
     {
