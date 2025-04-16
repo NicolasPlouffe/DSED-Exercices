@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_DAL_Municipalite_SQLSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_DAL_Import_Munic_CSV", "M01_DAL_Import_Munic_CSV\M01_DAL_Import_Munic_CSV.csproj", "{02EDDA7A-025B-46C2-9F84-CCBEAB8C8AA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_DAL_Import_Munic_JSON", "M01_DAL_Import_Munic_JSON\M01_DAL_Import_Munic_JSON.csproj", "{760C787D-49DA-42F1-AC7F-2539F7E892F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{02EDDA7A-025B-46C2-9F84-CCBEAB8C8AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02EDDA7A-025B-46C2-9F84-CCBEAB8C8AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02EDDA7A-025B-46C2-9F84-CCBEAB8C8AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760C787D-49DA-42F1-AC7F-2539F7E892F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760C787D-49DA-42F1-AC7F-2539F7E892F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760C787D-49DA-42F1-AC7F-2539F7E892F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760C787D-49DA-42F1-AC7F-2539F7E892F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
