@@ -11,7 +11,7 @@ public class MunicipaliteContextSQLServer:DbContext
     public MunicipaliteContextSQLServer(DbContextOptions<MunicipaliteContextSQLServer> options)
         : base(options)
     {
-        
+        ;
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
