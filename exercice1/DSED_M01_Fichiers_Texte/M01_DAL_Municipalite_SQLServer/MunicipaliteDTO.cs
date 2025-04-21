@@ -30,6 +30,7 @@ public class MunicipaliteDTO
         AdresseCourrielle = p_municipalite.AdresseCourrielle;
         AdresseWeb = p_municipalite.AdresseWeb;
         DateProchaineElection = DateTime.Now;
+        Actif = true;
     }
 
     #endregion
