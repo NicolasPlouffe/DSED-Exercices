@@ -37,7 +37,7 @@ public class MunicipaliteDTO
 
     #region Methods
 
-    public MunicipaliteEntite VerEntite()
+    public  MunicipaliteEntite VerEntite()
     {
         return new MunicipaliteEntite
         (this.MunicipaliteId
