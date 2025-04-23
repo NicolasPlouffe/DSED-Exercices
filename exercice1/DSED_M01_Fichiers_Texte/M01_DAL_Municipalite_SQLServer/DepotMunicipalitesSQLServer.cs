@@ -46,15 +46,8 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
 
     public MunicipaliteEntite? ChercherMunicipaliteParCodeGeographique(int p_municipaliteCodeGeographique)
     {
-        if (m_dBContext is null)
-        {
-            throw new ArgumentNullException(nameof(m_dBContext));
-        }
-
-        if (p_municipaliteCodeGeographique < 1)
-        {
-            throw new ArgumentOutOfRangeException(nameof(p_municipaliteCodeGeographique));
-        }
+        if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
+        if (p_municipaliteCodeGeographique < 1) { throw new ArgumentOutOfRangeException(nameof(p_municipaliteCodeGeographique)); }
         
         IQueryable<MunicipaliteDTO> requete = this.m_dBContext.Municipalites.Where(t => t.MunicipaliteId == p_municipaliteCodeGeographique);
         return requete.Select(c => c.VerEntite()).SingleOrDefault();
@@ -63,36 +56,39 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
 
     public IEnumerable<MunicipaliteEntite> ListerMunicipalitesActives()
     {
-        if (m_dBContext is null)
-        {
-            throw new ArgumentNullException(nameof(m_dBContext));
-        }
+        if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
+        
         IQueryable<MunicipaliteDTO> requete = this.m_dBContext.Municipalites;
-        return requete.Select(c => c.VerEntite()).ToList();
+        return requete.Select(o => o)
+            .Where(t => t.Actif == true)
+            .Select(c => c.VerEntite())
+            .ToList();
     }
 
     public void DesactiverMunicipalite(MunicipaliteEntite p_municipalite)
     {
-        if (m_dBContext is null)
-        {
-            throw new ArgumentNullException(nameof(m_dBContext));
-        }
+        if (m_dBContext is null) {throw new ArgumentNullException(nameof(m_dBContext));}
+        if (p_municipalite is null) {throw new ArgumentNullException(nameof(p_municipalite));}
+        
     }
 
     public void ActiverMunicipalite(MunicipaliteEntite p_municipalite)
     {
-        if (m_dBContext is null)
-        {
-            throw new ArgumentNullException(nameof(m_dBContext));
-        }
+        if (m_dBContext is null) {throw new ArgumentNullException(nameof(m_dBContext));}
+        if (p_municipalite is null) {throw new ArgumentNullException(nameof(p_municipalite));}
+        
+        
     }
 
     public void MAJMunicipalite(MunicipaliteEntite p_municipalite)
     {
-        if (m_dBContext is null)
-        {
-            throw new ArgumentNullException(nameof(m_dBContext));
-        }
+        if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
+        if (p_municipalite is null) { throw new ArgumentNullException(nameof(p_municipalite)); }
+        
+        MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
+        this.m_dBContext.Update(municipaliteDTO);
+        this.m_dBContext.SaveChanges();
+        this.m_dBContext.ChangeTracker.Clear();
     }
 
     #endregion
