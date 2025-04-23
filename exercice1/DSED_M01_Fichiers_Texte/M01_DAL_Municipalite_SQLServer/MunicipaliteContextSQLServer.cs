@@ -6,7 +6,7 @@ namespace M01_DAL_Municipalite_SQLServer;
 public class MunicipaliteContextSQLServer:DbContext
 {
   
-    public DbSet<MunicipaliteEntite> Municipalites { get; set; }
+    public DbSet<MunicipaliteDTO> Municipalites { get; set; }
     
     public MunicipaliteContextSQLServer(DbContextOptions<MunicipaliteContextSQLServer> options)
         : base(options)

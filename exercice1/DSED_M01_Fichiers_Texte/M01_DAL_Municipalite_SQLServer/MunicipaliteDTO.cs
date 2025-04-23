@@ -18,10 +18,10 @@ public class MunicipaliteDTO
 
     #region Constructor
 
-    public MunicipaliteDTO()
+    /*public MunicipaliteDTO()
     {
         ;
-    }
+    }*/
 
     public MunicipaliteDTO(MunicipaliteEntite p_municipalite)
     {
