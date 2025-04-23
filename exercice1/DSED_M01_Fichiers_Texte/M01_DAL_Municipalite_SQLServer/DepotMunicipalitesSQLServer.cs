@@ -27,15 +27,8 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
 
     public void AjouterMunicipalite(MunicipaliteEntite p_Entite)
     {
-        if (m_dBContext is null)
-        {
-            throw new ArgumentNullException(nameof(m_dBContext));
-        }
-
-        if (p_Entite is null)
-        {
-            throw new ArgumentNullException(nameof(p_Entite));
-        }
+        if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
+        if (p_Entite is null) { throw new ArgumentNullException(nameof(p_Entite)); }
 
         MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_Entite);
         this.m_dBContext.Add(municipaliteDTO);
@@ -51,7 +44,6 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         
         IQueryable<MunicipaliteDTO> requete = this.m_dBContext.Municipalites.Where(t => t.MunicipaliteId == p_municipaliteCodeGeographique);
         return requete.Select(c => c.VerEntite()).SingleOrDefault();
-
     }
 
     public IEnumerable<MunicipaliteEntite> ListerMunicipalitesActives()
@@ -70,6 +62,11 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         if (m_dBContext is null) {throw new ArgumentNullException(nameof(m_dBContext));}
         if (p_municipalite is null) {throw new ArgumentNullException(nameof(p_municipalite));}
         
+        MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
+        municipaliteDTO.Actif = false;
+        this.m_dBContext.Municipalites.Add(municipaliteDTO);
+        this.m_dBContext.SaveChanges();
+        this.m_dBContext.ChangeTracker.Clear();
     }
 
     public void ActiverMunicipalite(MunicipaliteEntite p_municipalite)
@@ -77,7 +74,11 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         if (m_dBContext is null) {throw new ArgumentNullException(nameof(m_dBContext));}
         if (p_municipalite is null) {throw new ArgumentNullException(nameof(p_municipalite));}
         
-        
+        MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
+        municipaliteDTO.Actif = true;
+        this.m_dBContext.Municipalites.Add(municipaliteDTO);
+        this.m_dBContext.SaveChanges();
+        this.m_dBContext.ChangeTracker.Clear();
     }
 
     public void MAJMunicipalite(MunicipaliteEntite p_municipalite)
