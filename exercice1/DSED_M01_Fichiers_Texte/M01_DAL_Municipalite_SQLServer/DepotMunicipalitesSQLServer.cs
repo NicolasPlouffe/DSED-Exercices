@@ -46,13 +46,17 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         return requete.Select(c => c.VerEntite()).SingleOrDefault();
     }
 
+    public static bool Comparaison(MunicipaliteDTO p_Entite1)
+    {
+        return p_Entite1.Actif;
+    }
     public IEnumerable<MunicipaliteEntite> ListerMunicipalitesActives()
     {
         if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
         
         IQueryable<MunicipaliteDTO> requete = this.m_dBContext.Municipalites;
-        return requete.Select(o => o)
-            .Where(t => t.Actif == true)
+        return requete
+            .Where(t => t.Actif )
             .Select(c => c.VerEntite())
             .ToList();
     }
