@@ -1,4 +1,5 @@
-﻿using M01_DAL_Municipalite_SQLServer;
+﻿using DSED_M01_Fichiers_Texte;
+using M01_DAL_Municipalite_SQLServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,28 +22,15 @@ hostApplicationBuilder.Configuration.AddJsonFile("appsettings.json", optional: t
 
 string connectionString = hostApplicationBuilder.Configuration.GetConnectionString("PersonnesConnection") ?? throw new InvalidOperationException("Connection string 'PersonnesConnection' not found.");
 
-hostApplicationBuilder.Services.AddDbContext<MunicipaliteContextSQLServer>(option => option.UseSqlServer(connectionString));
+// ajoute les services énuméré dans la classe - ajoute tous les scopes
+hostApplicationBuilder.Services.AddConfigDI(connectionString);
 
-//hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteJSON>();
-// ajouter conncetion bd
-// ajouter depot manipulation
-// ajouter reader
 IHost host = hostApplicationBuilder.Build();
 
 using (IServiceScope scope = host.Services.CreateScope())
 {
-    IServiceProvider serviceProvider = scope.ServiceProvider;
+    var serviceProvider = scope.ServiceProvider;
+
+    var context = serviceProvider.GetRequiredService<MunicipaliteContextSQLServer>();
+    var depot = serviceProvider.GetRequiredService<IDepotImportationMunicipalites>();
 }
-
-
-
-
-/*using (IServiceScope scope = host.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<MunicipaliteContextSQLServer>();
-    context.Database.OpenConnection(); // Test de connexion
-    Console.WriteLine(context.Database.EnsureCreated());
-    context.Database.CloseConnection();
-    
-}*/
-
