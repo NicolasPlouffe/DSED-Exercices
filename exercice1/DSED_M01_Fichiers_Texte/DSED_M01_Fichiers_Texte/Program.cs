@@ -23,8 +23,8 @@ string connectionString = hostApplicationBuilder.Configuration.GetConnectionStri
 
 hostApplicationBuilder.Services.AddDbContext<MunicipaliteContextSQLServer>(option => option.UseSqlServer(connectionString));
 
-hostApplicationBuilder.Services.AddScoped<DepotImportationMunicipaliteJSON,IDepotImportationMunicipalites>();
-hostApplicationBuilder.Services.AddScoped<DepotImportationMunicipaliteCSV,IDepotImportationMunicipalites>();
+hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteJSON>();
+hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteCSV>();
 
 IHost host = hostApplicationBuilder.Build();
 
