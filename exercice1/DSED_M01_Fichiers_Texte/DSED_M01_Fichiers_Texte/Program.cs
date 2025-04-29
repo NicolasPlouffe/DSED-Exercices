@@ -25,7 +25,9 @@ hostApplicationBuilder.Services.AddDbContext<MunicipaliteContextSQLServer>(optio
 
 //hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteJSON>();
 hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteCSV>();
-
+// ajouter conncetion bd
+// ajouter depot manipulation
+// ajouter reader
 IHost host = hostApplicationBuilder.Build();
 
 /*using (IServiceScope scope = host.Services.CreateScope())
