@@ -19,7 +19,7 @@ public class DepotImportationMunicipaliteCSV: IDepotImportationMunicipalites
 
     public IEnumerable<MunicipaliteEntite> LireMunicipalites()
     {
-        IEnumerable<MunicipaliteEntite> listeMunicipalite = new List<MunicipaliteEntite>();
+        List<MunicipaliteEntite> listeMunicipalite = new List<MunicipaliteEntite>();
 
         string ligneBrute;
 
@@ -40,15 +40,9 @@ public class DepotImportationMunicipaliteCSV: IDepotImportationMunicipalites
                 ,ligneDecoupe[7]
                 ,ligneDecoupe[8]
                 ,date);
-            listeMunicipalite.Append(nouvelleMunicipalite);
-            
-            
+            listeMunicipalite.Add(nouvelleMunicipalite);
         }
         
-        
-            
-     
-
         return listeMunicipalite;
     }
 }
