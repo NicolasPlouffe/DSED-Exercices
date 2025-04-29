@@ -16,7 +16,6 @@ public class DepotImportationMunicipaliteCSV: IDepotImportationMunicipalites
         NomFichier = p_nomFichierAImporter;
     }
 
-
     public IEnumerable<MunicipaliteEntite> LireMunicipalites()
     {
         List<MunicipaliteEntite> listeMunicipalite = new List<MunicipaliteEntite>();
