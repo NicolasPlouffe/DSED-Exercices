@@ -87,10 +87,10 @@ private bool actif;
 
     #region Constructor
 
-    /*public MunicipaliteDTO()
+    public MunicipaliteDTO()
     {
         ;
-    }*/
+    }
 
     public MunicipaliteDTO(MunicipaliteEntite p_municipalite)
     {

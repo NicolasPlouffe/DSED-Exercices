@@ -24,20 +24,25 @@ string connectionString = hostApplicationBuilder.Configuration.GetConnectionStri
 hostApplicationBuilder.Services.AddDbContext<MunicipaliteContextSQLServer>(option => option.UseSqlServer(connectionString));
 
 //hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteJSON>();
-hostApplicationBuilder.Services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteCSV>();
 // ajouter conncetion bd
 // ajouter depot manipulation
 // ajouter reader
 IHost host = hostApplicationBuilder.Build();
 
-/*using (IServiceScope scope = host.Services.CreateScope())
+using (IServiceScope scope = host.Services.CreateScope())
 {
     IServiceProvider serviceProvider = scope.ServiceProvider;
-}*/
-using (IServiceScope scope = host.Services.CreateScope())
+}
+
+
+
+
+/*using (IServiceScope scope = host.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<MunicipaliteContextSQLServer>();
     context.Database.OpenConnection(); // Test de connexion
+    Console.WriteLine(context.Database.EnsureCreated());
     context.Database.CloseConnection();
-}
+    
+}*/
 

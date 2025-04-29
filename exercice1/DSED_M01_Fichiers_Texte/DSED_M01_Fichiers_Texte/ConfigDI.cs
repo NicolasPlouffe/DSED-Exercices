@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using M01_Entite.IDepot;
 using M01_DAL_Municipalite_SQLServer;
+using M01_DAL_Import_Munic_CSV;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,16 @@ namespace DSED_M01_Fichiers_Texte;
 {
     public static IServiceCollection AddConfigDI(this IServiceCollection services)
     {
+        // Énumération des services de l'application
+        services.AddScoped<IDepotImportationMunicipalites>(provider => 
+            new DepotImportationMunicipaliteCSV("/data/csv/municipalites.csv"));
         
         // Ajout correspondances vers les IDepot
-        services.AddScoped<IDepotImportationMunicipalites>();
-        services.AddScoped<IDepotMunicipalites>();
-        
+        services.AddScoped<IDepotImportationMunicipalites,DepotImportationMunicipaliteCSV>();
+        services.AddScoped<IDepotMunicipalites, DepotMunicipalitesSQLServer>();
         
         services.AddScoped<ITransactionBD>(provider => provider.GetService<MunicipaliteContextSQLServer>()!);
         
-            
-            
-            
-            return services;
+        return services;
     }
 }
