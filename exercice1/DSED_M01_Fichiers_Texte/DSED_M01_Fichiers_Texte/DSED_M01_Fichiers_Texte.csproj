@@ -9,6 +9,14 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.15" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\M01_DAL_Import_Munic_CSV\M01_DAL_Import_Munic_CSV.csproj" />
+      <ProjectReference Include="..\M01_DAL_Import_Munic_JSON\M01_DAL_Import_Munic_JSON.csproj" />
+      <ProjectReference Include="..\M01_DAL_Municipalite_SQLServer\M01_DAL_Municipalite_SQLServer.csproj" />
+      <ProjectReference Include="..\M01_Entite\M01_Entite.csproj" />
     </ItemGroup>
 
 </Project>
