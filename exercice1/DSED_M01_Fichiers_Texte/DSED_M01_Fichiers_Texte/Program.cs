@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using M01_Srv_Municipalite;
 
 string cheminCSV = "../M01_FichiersImportes/MUN.csv";
 
@@ -34,6 +35,13 @@ using (IServiceScope scope = host.Services.CreateScope())
     var serviceProvider = scope.ServiceProvider;
 
     var context = serviceProvider.GetRequiredService<MunicipaliteContextSQLServer>();
-    var depot = serviceProvider.GetRequiredService<IDepotImportationMunicipalites>();
+    var depotImport = serviceProvider.GetRequiredService<IDepotImportationMunicipalites>();
+    var depotMunicipalite = serviceProvider.GetRequiredService<IDepotMunicipalites>();
+
+    TraitementImporterDonneesMunicipalite traitementBL = new TraitementImporterDonneesMunicipalite(depotImport,depotMunicipalite);
+    
+    Console.WriteLine(traitementBL.Executer().ToString());
+    
 }
+
 

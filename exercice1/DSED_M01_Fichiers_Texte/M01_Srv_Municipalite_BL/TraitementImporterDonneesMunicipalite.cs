@@ -8,9 +8,9 @@ public class TraitementImporterDonneesMunicipalite
         ;
     }
 
-    void Executer(StatistiquesImportationDonnees p_statistiquesImportationDonnees)
+   public StatistiquesImportationDonnees Executer()
     {
-        ;
+        throw new NotImplementedException();
     }
     
 }

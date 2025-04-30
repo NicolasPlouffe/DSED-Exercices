@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 namespace DSED_M01_Fichiers_Texte;
     internal static class ConfigDI
     {
+        
+        // mettre dans import csv
         private static readonly Regex cheminCSV = new Regex(@"^.*[\/\\][^\/\\]+\.csv$");
     public static IServiceCollection AddConfigDI(this IServiceCollection services, string connectionString, string p_cheminCSV)
     {

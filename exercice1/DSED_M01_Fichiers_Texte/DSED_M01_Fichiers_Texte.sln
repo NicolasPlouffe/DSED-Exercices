@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED_M01_Fichiers_Texte", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_Entite", "M01_Entite\M01_Entite.csproj", "{D1D3F9B4-E876-42EC-818E-3DC3D5A69DB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_Srv_Municipalite", "M01_Srv_Municipalite\M01_Srv_Municipalite.csproj", "{3460C924-F684-4C4B-A7C0-0E0E53550F93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_Srv_Municipalite_BL", "M01_Srv_Municipalite_BL\M01_Srv_Municipalite_BL.csproj", "{3460C924-F684-4C4B-A7C0-0E0E53550F93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_DAL_Municipalite_SQLServer", "M01_DAL_Municipalite_SQLServer\M01_DAL_Municipalite_SQLServer.csproj", "{6A190C3A-D317-47D5-AD0A-A599CE128BD0}"
 EndProject
