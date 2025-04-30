@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+string cheminCSV = "../M01_FichiersImportes/MUN.csv";
+
 HostApplicationBuilder hostApplicationBuilder = Host.CreateApplicationBuilder(args);
 
 IHostEnvironment env = hostApplicationBuilder.Environment;
@@ -23,7 +25,7 @@ hostApplicationBuilder.Configuration.AddJsonFile("appsettings.json", optional: t
 string connectionString = hostApplicationBuilder.Configuration.GetConnectionString("PersonnesConnection") ?? throw new InvalidOperationException("Connection string 'PersonnesConnection' not found.");
 
 // ajoute les services énuméré dans la classe - ajoute tous les scopes
-hostApplicationBuilder.Services.AddConfigDI(connectionString);
+hostApplicationBuilder.Services.AddConfigDI(connectionString,cheminCSV);
 
 IHost host = hostApplicationBuilder.Build();
 
@@ -34,3 +36,4 @@ using (IServiceScope scope = host.Services.CreateScope())
     var context = serviceProvider.GetRequiredService<MunicipaliteContextSQLServer>();
     var depot = serviceProvider.GetRequiredService<IDepotImportationMunicipalites>();
 }
+

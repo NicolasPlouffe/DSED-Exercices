@@ -6,14 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace DSED_M01_Fichiers_Texte;
     internal static class ConfigDI
-{
-    public static IServiceCollection AddConfigDI(this IServiceCollection services, string connectionString)
     {
+        private static readonly Regex cheminCSV = new Regex(@"^.*[\/\\][^\/\\]+\.csv$");
+    public static IServiceCollection AddConfigDI(this IServiceCollection services, string connectionString, string p_cheminCSV)
+    {
+       
+        if (!cheminCSV.IsMatch(p_cheminCSV)){throw new FormatException("Le chemin cette CSV n'est pas valide");}
+        
         // Énumération des services de l'application
         
         // DB Contect
@@ -21,7 +26,7 @@ namespace DSED_M01_Fichiers_Texte;
         
         // Importation et lecture de CSV
         services.AddScoped<IDepotImportationMunicipalites>(provider => 
-            new DepotImportationMunicipaliteCSV("/data/csv/municipalites.csv"));
+            new DepotImportationMunicipaliteCSV(p_cheminCSV));
         
         // Ajout correspondances vers les IDepot
         services.AddScoped<IDepotMunicipalites, DepotMunicipalitesSQLServer>();
