@@ -9,9 +9,7 @@ public class TraitementImporterDonneesMunicipalite
     // objet input
     private readonly IDepotImportationMunicipalites depotImport;
     // obj poutput
-    private readonly IDepotMunicipalites depotMunicipalite;
-
-    private DepotMunicipalitesSQLServer depot;
+    private readonly IDepotMunicipalites depotMunicipalite ;
     
     public TraitementImporterDonneesMunicipalite(IDepotImportationMunicipalites p_depotImportMunicipalites, IDepotMunicipalites p_depotMunicipalites) 
     {
@@ -23,34 +21,53 @@ public class TraitementImporterDonneesMunicipalite
     {
         StatistiquesImportationDonnees stats = new StatistiquesImportationDonnees();
 
-        /// Read CSV avec Impor Munic CSV
-      IEnumerable<MunicipaliteEntite>listeEntree = depotImport.LireMunicipalites();
-        stats.NombreEnregistrementsImportees += listeEntree.Count();
-      
-      MunicipaliteEntite municipaliteTest = depotMunicipalite.ChercherMunicipaliteParCodeGeographique(46005);
-      
-      
-      foreach (MunicipaliteEntite ent in listeEntree)
-      {
-          //Query ent.id = bd.id 
-          // if query ent.id is nul
-          if (depotMunicipalite.ChercherMunicipaliteParCodeGeographique(ent.CodeGeographique) is null)
+        /// Read CSV avec Import Munic CSV
+        IEnumerable<MunicipaliteEntite>listeEntiteCSV = depotImport.LireMunicipalites();
+        stats.NombreEnregistrementsImportees += listeEntiteCSV.Count();
+
+        // Dicionnaire des codes Geo pour une comparaison rapide avec la BD, pour des raisons d'économie de traitement
+        var dictionnaireCSV = listeEntiteCSV.ToDictionary(c => c.CodeGeographique, c => c);
+        
+        // Liste des Municipalitée actives au niveau de la BD
+        IEnumerable<MunicipaliteEntite> enregistrementsActifsBD = depotMunicipalite.ListerMunicipalitesActives();
+    
+        // Construction du HAshSet pour codes GEO CSV
+        var idsCSV = new HashSet<int>(dictionnaireCSV.Keys);
+    
+        //Mise a jour du status de la BD - pour désactiver s'il a eu des suppression de la source
+        foreach (var codeGeoBD in enregistrementsActifsBD)
+        {
+            if (!idsCSV.Contains(codeGeoBD.CodeGeographique))
+            {
+                depotMunicipalite.DesactiverMunicipalite(codeGeoBD);
+                stats.NombreEnregistrementsDesactives++;
+            }
+        }
+    
+        // Ajout ou MAJ de la BD
+        foreach (var enititeCSV in listeEntiteCSV)
+        {
+            MunicipaliteEntite entiteBD = depotMunicipalite.ChercherMunicipaliteParCodeGeographique(enititeCSV.CodeGeographique);
+            
+          if (entiteBD is null)
           {
-              depotMunicipalite.AjouterMunicipalite(ent);
+              depotMunicipalite.AjouterMunicipalite(enititeCSV);
               stats.NombreEnregistrementsAjoutes++;
           }
-          else if (!depotMunicipalite.ChercherMunicipaliteParCodeGeographique(ent.CodeGeographique).Equals(ent)
+      
+          else if (!entiteBD.Equals(enititeCSV))
           {
-              depotMunicipalite.MAJMunicipalite(ent);
+              entiteBD.CodeGeographique = enititeCSV.CodeGeographique;
+              entiteBD.NomMunicipalite = enititeCSV.NomMunicipalite;
+              entiteBD.AdresseWeb = enititeCSV.AdresseWeb;
+              entiteBD.AdresseCourrielle = enititeCSV.AdresseCourrielle;
+              entiteBD.DateProchaineElection = enititeCSV.DateProchaineElection;
+              
+              depotMunicipalite.MAJMunicipalite(entiteBD);
               stats.NombreEnregistrementsModifies++;
               stats.NombreEnregistrementsNonModifies--;
           }
-      }
-      
-
-      /// table importé besoin de comparer chaque enregistrement de l'inport avec son équivalent de la bd
-        /// Besoin de fetcher la BD et comparer avec l'import, mais le traitement sera lourd
-        
+        }
         return stats;
     }
     

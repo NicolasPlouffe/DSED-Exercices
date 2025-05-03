@@ -18,21 +18,21 @@ public class MunicipaliteDTO
     
     #region Properties
 
-    private int municipaliteId;
+    private int codeGeographique;
 private string nomMunicipalite;
-private string? adresseCourrielle;
+private string? adresseCourriel;
 private string? adresseWeb;
-private DateTime dateProchaineElection;
+private DateTime? dateProchaineElection;
 private bool actif;
 
     [Key]
-    public int MunicipaliteId
+    public int CodeGeographique
     {
-        get { return this.municipaliteId; }
+        get { return this.codeGeographique; }
         set
         {
             if (value <= 0){throw new ArgumentOutOfRangeException("Numero  de municipalite doit être positi");} 
-            else{this.municipaliteId = value;}
+            else{this.codeGeographique = value;}
         }
     }
 
@@ -41,20 +41,20 @@ private bool actif;
         get{return this.nomMunicipalite;}
         set
         {
-            if(value.Length < longueureNomMunicipalite){throw new ArgumentOutOfRangeException("Nom doit pas depace {longueureNomMunicipalite}");}
+            if(value.Length > longueureNomMunicipalite){throw new ArgumentOutOfRangeException("Nom doit pas depace {longueureNomMunicipalite}");}
             else{this.nomMunicipalite = value;}
         }
     }
 
-    public string? AdresseCourrielle
+    public string? AdresseCourriel
     {
-        get{return this.adresseCourrielle;}
+        get{return this.adresseCourriel;}
         set
         {
             if(!courrielRegex.IsMatch(value)){throw new AmbiguousMatchException("Le courriel ne respect pas le format attendu");}
             else
             {
-                this.adresseCourrielle = value;
+                this.adresseCourriel = value;
             }
         }
     }
@@ -72,7 +72,7 @@ private bool actif;
         }
     }
 
-    public DateTime DateProchaineElection
+    public DateTime? DateProchaineElection
     {
         get{return this.dateProchaineElection;}
         set
@@ -96,11 +96,11 @@ private bool actif;
     {
         if(p_municipalite == null) {throw new ArgumentNullException(nameof(p_municipalite));}
         
-        MunicipaliteId = p_municipalite.CodeGeographique;
+        CodeGeographique = p_municipalite.CodeGeographique;
         NomMunicipalite = p_municipalite.NomMunicipalite;
-        AdresseCourrielle = p_municipalite.AdresseCourrielle;
+        AdresseCourriel = p_municipalite.AdresseCourrielle;
         AdresseWeb = p_municipalite.AdresseWeb;
-        DateProchaineElection = DateTime.Now;
+        DateProchaineElection = p_municipalite.DateProchaineElection;
         Actif = true;
     }
 
@@ -111,11 +111,12 @@ private bool actif;
     public  MunicipaliteEntite VerEntite()
     {
         return new MunicipaliteEntite
-        (this.MunicipaliteId
+        (this.CodeGeographique
             , this.NomMunicipalite
-            , this.AdresseCourrielle
+            , this.AdresseCourriel
             , this.AdresseWeb
-            , this.DateProchaineElection);
+            , this.DateProchaineElection ?? DateTime.Today.AddYears(5)
+        );
     }
 
     #endregion

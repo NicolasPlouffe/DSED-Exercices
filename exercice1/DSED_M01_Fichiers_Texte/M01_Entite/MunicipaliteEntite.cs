@@ -1,4 +1,6 @@
-﻿namespace M01_Entite;
+﻿using System.Runtime.InteropServices.JavaScript;
+
+namespace M01_Entite;
 
 public class MunicipaliteEntite
 {
@@ -25,11 +27,22 @@ public class MunicipaliteEntite
     
     public override bool Equals(object? obj)
     {
-        return base.Equals(obj);
+        return obj is MunicipaliteEntite municipalite &&
+               CodeGeographique == municipalite.CodeGeographique && 
+               NomMunicipalite == municipalite.NomMunicipalite &&
+               AdresseCourrielle == municipalite.AdresseCourrielle &&
+               AdresseWeb == municipalite.AdresseWeb &&
+               DateProchaineElection == municipalite.DateProchaineElection;
     }
 
     public override int GetHashCode()
     {
-        return GetType().Name.GetHashCode();
+        return HashCode.Combine(
+            CodeGeographique, 
+            NomMunicipalite, 
+            AdresseCourrielle, 
+            AdresseWeb, 
+            DateProchaineElection
+        );
     }
 }

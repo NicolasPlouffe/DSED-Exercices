@@ -34,7 +34,7 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         this.m_dBContext.Add(municipaliteDTO);
         this.m_dBContext.SaveChanges();
         this.m_dBContext.ChangeTracker.Clear();
-        p_Entite.CodeGeographique = municipaliteDTO.MunicipaliteId;
+        p_Entite.CodeGeographique = municipaliteDTO.CodeGeographique;
     }
 
     public MunicipaliteEntite? ChercherMunicipaliteParCodeGeographique(int p_municipaliteCodeGeographique)
@@ -42,7 +42,10 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
         if (p_municipaliteCodeGeographique < 1) { throw new ArgumentOutOfRangeException(nameof(p_municipaliteCodeGeographique)); }
         
-        IQueryable<MunicipaliteDTO> requete = this.m_dBContext.Municipalites.Where(t => t.MunicipaliteId == p_municipaliteCodeGeographique);
+        IQueryable<MunicipaliteDTO> requete = 
+                                    this.m_dBContext.Municipalites 
+                                    .Where(t => t.CodeGeographique == p_municipaliteCodeGeographique);
+        
         return requete.Select(c => c.VerEntite()).SingleOrDefault();
     }
 
@@ -90,11 +93,31 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         if (m_dBContext is null) { throw new ArgumentNullException(nameof(m_dBContext)); }
         if (p_municipalite is null) { throw new ArgumentNullException(nameof(p_municipalite)); }
         
-        MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
+        // Trouver le DTO existant dans le contexte
+        var municipaliteDTO = m_dBContext.Municipalites
+            .FirstOrDefault(m => m.CodeGeographique == p_municipalite.CodeGeographique);
+
+        if (municipaliteDTO is not null)
+        {
+            municipaliteDTO.CodeGeographique = p_municipalite.CodeGeographique;
+            municipaliteDTO.NomMunicipalite = p_municipalite.NomMunicipalite;
+            municipaliteDTO.AdresseWeb = p_municipalite.AdresseWeb;
+            municipaliteDTO.AdresseCourriel = p_municipalite.AdresseCourrielle;
+            municipaliteDTO.DateProchaineElection = p_municipalite.DateProchaineElection;
+            municipaliteDTO.Actif = true;
+        }
+        
+        //MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
         this.m_dBContext.Update(municipaliteDTO);
         this.m_dBContext.SaveChanges();
         this.m_dBContext.ChangeTracker.Clear();
     }
+    
+  
+
+    
 
     #endregion
+
+ 
 }
