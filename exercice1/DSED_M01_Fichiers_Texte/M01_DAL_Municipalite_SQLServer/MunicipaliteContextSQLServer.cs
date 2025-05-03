@@ -20,7 +20,7 @@ public class MunicipaliteContextSQLServer:DbContext,ITransactionBD
         if (!optionsBuilder.IsConfigured)
             
         {
-           // optionsBuilder.UseSqlServer("Server=localhost;Database=MunicipaliteDB;User Id=sa;Password=your_password;");
+           optionsBuilder.UseSqlServer("Server=localhost;Database=MunicipaliteDB;User Id=sa;Password=your_password;").UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
     }
 

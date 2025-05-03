@@ -64,8 +64,8 @@ private bool actif;
         get{return this.adresseWeb;}
         set
         {
-            if(!siteWebRegex.IsMatch(value)){throw new AmbiguousMatchException("Le site web ne respect pas le format attendu");}
-            else
+            //if(!siteWebRegex.IsMatch(value)){throw new AmbiguousMatchException("Le site web ne respect pas le format attendu");}
+            //else
             {
                 this.adresseWeb = value;
             }
@@ -77,8 +77,9 @@ private bool actif;
         get{return this.dateProchaineElection;}
         set
         {
-            if(value <= DateTime.Today){throw new ArgumentOutOfRangeException("Date doit etre dans le futur");}
-            else{this.dateProchaineElection = value;}
+            //if(value <= DateTime.Today){throw new ArgumentOutOfRangeException("Date doit etre dans le futur");}
+            //else
+            {this.dateProchaineElection = value;}
         }
     }
     public bool Actif { get; set; }

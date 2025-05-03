@@ -33,7 +33,7 @@ IHost host = hostApplicationBuilder.Build();
 using (IServiceScope scope = host.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
-
+    
     var context = serviceProvider.GetRequiredService<MunicipaliteContextSQLServer>();
     var depotImport = serviceProvider.GetRequiredService<IDepotImportationMunicipalites>();
     var depotMunicipalite = serviceProvider.GetRequiredService<IDepotMunicipalites>();

@@ -24,7 +24,7 @@ namespace DSED_M01_Fichiers_Texte;
         // Énumération des services de l'application
         
         // DB Contect
-        services.AddDbContext<MunicipaliteContextSQLServer>(option => option.UseSqlServer(connectionString));
+        services.AddDbContext<MunicipaliteContextSQLServer>(option => option.UseSqlServer(connectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
         
         // Importation et lecture de CSV
         services.AddScoped<IDepotImportationMunicipalites>(provider => 

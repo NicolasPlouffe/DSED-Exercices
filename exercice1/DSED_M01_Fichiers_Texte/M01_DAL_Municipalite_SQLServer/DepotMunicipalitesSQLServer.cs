@@ -71,7 +71,7 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         
         MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
         municipaliteDTO.Actif = false;
-        this.m_dBContext.Municipalites.Add(municipaliteDTO);
+        this.m_dBContext.Municipalites.Update(municipaliteDTO);
         this.m_dBContext.SaveChanges();
         this.m_dBContext.ChangeTracker.Clear();
     }
@@ -83,7 +83,7 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
         
         MunicipaliteDTO municipaliteDTO = new MunicipaliteDTO(p_municipalite);
         municipaliteDTO.Actif = true;
-        this.m_dBContext.Municipalites.Add(municipaliteDTO);
+        this.m_dBContext.Municipalites.Update(municipaliteDTO);
         this.m_dBContext.SaveChanges();
         this.m_dBContext.ChangeTracker.Clear();
     }
