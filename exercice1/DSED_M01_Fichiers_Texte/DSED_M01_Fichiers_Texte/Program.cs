@@ -1,18 +1,10 @@
 ﻿using DSED_M01_Fichiers_Texte;
 using M01_DAL_Municipalite_SQLServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using M01_Entite;
 using M01_Entite.IDepot;
-using M01_DAL_Import_Munic_CSV;
-using M01_DAL_Import_Munic_JSON;
-using M01_Entite.IDepot;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
 using M01_Srv_Municipalite;
 
 string cheminCSV = "/home/nico/Documents/Dev/AEC/DSED/420-W47-SF-main/DSED-Exercices/exercice1/DSED_M01_Fichiers_Texte/M01_FichiersImportes/MUN.csv";

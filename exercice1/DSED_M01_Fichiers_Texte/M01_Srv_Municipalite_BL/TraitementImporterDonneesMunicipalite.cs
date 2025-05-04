@@ -44,15 +44,12 @@ public class TraitementImporterDonneesMunicipalite
       
           else if (!entiteBD.Equals(enititeCSV))
           {
-              entiteBD.CodeGeographique = enititeCSV.CodeGeographique;
-              entiteBD.NomMunicipalite = enititeCSV.NomMunicipalite;
-              entiteBD.AdresseWeb = enititeCSV.AdresseWeb;
-              entiteBD.AdresseCourriel = enititeCSV.AdresseCourriel;
-              entiteBD.DateProchaineElection = enititeCSV.DateProchaineElection;
-              
-              depotMunicipalite.MAJMunicipalite(entiteBD);
+              depotMunicipalite.MAJMunicipalite(enititeCSV);
               stats.NombreEnregistrementsModifies++;
-              stats.NombreEnregistrementsNonModifies--;
+          }
+          else
+          {
+              stats.NombreEnregistrementsNonModifies++;
           }
         }
         return stats;
