@@ -9,7 +9,7 @@ public sealed class MunicipaliteMap : ClassMap<MunicipaliteEntite>
     {
         Map(m => m.CodeGeographique).Name("mcode");
         Map(m => m.NomMunicipalite).Name("munnom");
-        Map(m => m.AdresseCourrielle).Name("mcourriel");
+        Map(m => m.AdresseCourriel).Name("mcourriel");
         Map(m => m.AdresseWeb).Name("mweb");
         Map(m => m.DateProchaineElection).Name("datelec");
     }

@@ -102,7 +102,7 @@ public class DepotMunicipalitesSQLServer : IDepotMunicipalites
             municipaliteDTO.CodeGeographique = p_municipalite.CodeGeographique;
             municipaliteDTO.NomMunicipalite = p_municipalite.NomMunicipalite;
             municipaliteDTO.AdresseWeb = p_municipalite.AdresseWeb;
-            municipaliteDTO.AdresseCourriel = p_municipalite.AdresseCourrielle;
+            municipaliteDTO.AdresseCourriel = p_municipalite.AdresseCourriel;
             municipaliteDTO.DateProchaineElection = p_municipalite.DateProchaineElection;
             municipaliteDTO.Actif = true;
         }

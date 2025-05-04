@@ -12,8 +12,14 @@ public class MunicipaliteDTO
     private int longueureNomMunicipalite = 100;
     private int longueureCourrielWeb = 50;
     private Regex courrielRegex = new Regex(@"^[^@\s]{1,50}@[^@\s]{1,50}\.[^@\s]{1,50}$");
-    private Regex siteWebRegex = new Regex(@"^(https?:\/\/)?([\w\-]{1,50}\.)+[\w\-]{1,50}(\/[\w\-]{1,50})*$");
-        
+    private Regex siteWebRegex = new Regex(
+        @"^(https?:\/\/)?" +                      // Protocole optionnel
+        @"(www\.)?" +                              // Sous-domaine www optionnel
+        @"([-a-zA-Z0-9@:%._\+~#=]{1,256}\.)" +     // Domaine principal
+        @"[a-zA-Z0-9()]{1,6}" +                    // TLD (1-6 caractères)
+        @"\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$",     // Chemin/paramètres optionnels
+        RegexOptions.Compiled
+    );    
     #endregion
     
     #region Properties
@@ -51,10 +57,20 @@ private bool actif;
         get{return this.adresseCourriel;}
         set
         {
-            if(!courrielRegex.IsMatch(value)){throw new AmbiguousMatchException("Le courriel ne respect pas le format attendu");}
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                this.adresseCourriel = null;
+            }
             else
             {
-                this.adresseCourriel = value;
+                string valeurFiltree = value.Trim();
+
+                if (!courrielRegex.IsMatch(valeurFiltree))
+                {
+                    throw new FormatException("Le courriel ne respecte pas le format attendu");
+                }
+                
+                this.adresseCourriel = valeurFiltree;
             }
         }
     }
@@ -64,10 +80,20 @@ private bool actif;
         get{return this.adresseWeb;}
         set
         {
-            //if(!siteWebRegex.IsMatch(value)){throw new AmbiguousMatchException("Le site web ne respect pas le format attendu");}
-            //else
+        if (string.IsNullOrWhiteSpace(value))
             {
-                this.adresseWeb = value;
+                this.adresseWeb = null;
+            }
+            else
+            {
+                string valeurFiltree = value.Trim();
+
+                if (!siteWebRegex.IsMatch(valeurFiltree))
+                {
+                    throw new FormatException("Le site web ne respect pas le format attendu");
+                }
+                this.adresseWeb = valeurFiltree;
+                
             }
         }
     }
@@ -99,7 +125,7 @@ private bool actif;
         
         CodeGeographique = p_municipalite.CodeGeographique;
         NomMunicipalite = p_municipalite.NomMunicipalite;
-        AdresseCourriel = p_municipalite.AdresseCourrielle;
+        AdresseCourriel = p_municipalite.AdresseCourriel;
         AdresseWeb = p_municipalite.AdresseWeb;
         DateProchaineElection = p_municipalite.DateProchaineElection;
         Actif = true;

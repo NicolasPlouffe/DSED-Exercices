@@ -16,3 +16,5 @@ CREATE TABLE municipalites (
     ,DateProchaineElection DATETIME NULL
     ,Actif BIT NOT NULL DEFAULT 1
 );
+
+SELECT * FROM municipalites m ;
