@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+      <PackageReference Include="Moq" Version="4.20.72" />
+      <PackageReference Include="more.xunit.runner.visualstudio" Version="2.3.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\M01_DAL_Import_Munic_CSV\M01_DAL_Import_Munic_CSV.csproj" />
+      <ProjectReference Include="..\M01_DAL_Import_Munic_JSON\M01_DAL_Import_Munic_JSON.csproj" />
+      <ProjectReference Include="..\M01_DAL_Municipalite_SQLServer\M01_DAL_Municipalite_SQLServer.csproj" />
+      <ProjectReference Include="..\M01_Entite\M01_Entite.csproj" />
+      <ProjectReference Include="..\M01_Srv_Municipalite_BL\M01_Srv_Municipalite_BL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

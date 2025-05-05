@@ -16,6 +16,7 @@ using M01_DAL_Import_Munic_CSV;
 using M01_DAL_Municipalite_SQLServer;
 using M01_Srv_Municipalite;
 using M01_DAL_Import_Munic_JSON;
+using M01_DAL_Import_Munic_REST_JSON;
 
 namespace DSED_M01_Fichiers_Texte
 {
@@ -50,6 +51,9 @@ namespace DSED_M01_Fichiers_Texte
                     break;
                 case ".json":
                     builder.Services.AddScoped<IDepotImportationMunicipalites, DepotImportationMunicipaliteJSON>();
+                    break;
+                case "get":
+                    builder.Services.AddScoped<IDepotImportationMunicipalites, DepotImportation_Muni_REST_JSON>();
                     break;
                 default:
                     throw new InvalidOperationException(

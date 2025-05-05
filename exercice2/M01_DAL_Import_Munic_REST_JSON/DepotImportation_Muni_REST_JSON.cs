@@ -4,16 +4,16 @@ using M01_Srv_Municipalite;
 
 namespace M01_DAL_Import_Munic_REST_JSON;
 
-public class Importation_Muni_REST_JSON:IDepotImportationMunicipalites
+public class DepotImportation_Muni_REST_JSON:IDepotImportationMunicipalites
 {
 
-    private static string uriRechercheParCodeGeographique = "https://www.donneesquebec.ca/recherche/api/action/datastore_search?resource_id=19385b4e-5503-4330-9e59-f998f5918363&limit=3000";
-    public HttpClient httpClient;
+    private readonly string uriRechercheParCodeGeographique = "https://www.donneesquebec.ca/recherche/api/action/datastore_search?resource_id=19385b4e-5503-4330-9e59-f998f5918363&limit=3000";
+    private readonly HttpClient _httpClient;
     
     
-    public Importation_Muni_REST_JSON()
+    public DepotImportation_Muni_REST_JSON()
     {
-        httpClient = new HttpClient();
+        _httpClient = new HttpClient();
     }
     
     
@@ -22,10 +22,10 @@ public class Importation_Muni_REST_JSON:IDepotImportationMunicipalites
         
         List<Municipalite>? municipalites = null;
         
-        this.httpClient.BaseAddress = new Uri("https://www.donneesquebec.ca/");
-        this.httpClient.DefaultRequestHeaders.Accept.Clear();
-        this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        Task<HttpResponseMessage> responseTask = httpClient.GetAsync(uriRechercheParCodeGeographique);
+        this._httpClient.BaseAddress = new Uri("https://www.donneesquebec.ca/");
+        this._httpClient.DefaultRequestHeaders.Accept.Clear();
+        this._httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        Task<HttpResponseMessage> responseTask = _httpClient.GetAsync(uriRechercheParCodeGeographique);
         responseTask.Wait();
         HttpResponseMessage response = responseTask.Result;
 
