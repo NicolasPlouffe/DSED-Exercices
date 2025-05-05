@@ -24,3 +24,4 @@ public class DepotImportationMunicipaliteCSV: IDepotImportationMunicipalites
         return records;
     }
 }
+// pour l'utilisation de CSV Helper https://wellsb.com/csharp/learn/read-csv-dotnet-csvhelper

@@ -29,6 +29,8 @@ public class TraitementImporterDonneesMunicipalite
         // Liste des Municipalitée actives au niveau de la BD
         IEnumerable<MunicipaliteEntite> enregistrementsActifsBD = depotMunicipalite.ListerMunicipalitesActives();
         
+        // Fruit d'une réflextion et collaboration avec le meilleur ruber duck de mon entourage
+        // Jeff The Legend  Foxtrot, Bravo, Delta Tango 
         enregistrementsActifsBD.Where(m => !listeEntiteCSV.Contains(m)).ToList().ForEach(m => depotMunicipalite.DesactiverMunicipalite(m));
         
         // Ajout ou MAJ de la BD

@@ -9,10 +9,13 @@ using M01_Srv_Municipalite;
 
 //string cheminCSV = "/home/nico/Documents/Dev/AEC/DSED/420-W47-SF-main/DSED-Exercices/DSED-Exercices/exercice1/DSED_M01_Fichiers_Texte/M01_FichiersImportes/MUN.csv";
 
+// Solution pour obtenir le chemin relatif a été le fruit d'une collaboration avec L'IA
 string dossierExecution = AppDomain.CurrentDomain.BaseDirectory;
 string racineProjet = Path.GetFullPath(Path.Combine(dossierExecution, "..", "..", "..", "..")).Replace('\\', '/');
 string cheminCSV = Path.Combine(racineProjet, "M01_FichiersImportes", "MUN.csv");
 
+
+// Moteur Injection de dépendance est la réutilisation de l'exemple fournis dans le cours de BDA
 HostApplicationBuilder hostApplicationBuilder = Host.CreateApplicationBuilder(args);
 
 IHostEnvironment env = hostApplicationBuilder.Environment;
