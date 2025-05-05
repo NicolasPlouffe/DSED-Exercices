@@ -7,7 +7,11 @@ using M01_Entite.IDepot;
 
 using M01_Srv_Municipalite;
 
-string cheminCSV = "/home/nico/Documents/Dev/AEC/DSED/420-W47-SF-main/DSED-Exercices/exercice1/DSED_M01_Fichiers_Texte/M01_FichiersImportes/MUN.csv";
+//string cheminCSV = "/home/nico/Documents/Dev/AEC/DSED/420-W47-SF-main/DSED-Exercices/DSED-Exercices/exercice1/DSED_M01_Fichiers_Texte/M01_FichiersImportes/MUN.csv";
+
+string dossierExecution = AppDomain.CurrentDomain.BaseDirectory;
+string racineProjet = Path.GetFullPath(Path.Combine(dossierExecution, "..", "..", "..", "..")).Replace('\\', '/');
+string cheminCSV = Path.Combine(racineProjet, "M01_FichiersImportes", "MUN.csv");
 
 HostApplicationBuilder hostApplicationBuilder = Host.CreateApplicationBuilder(args);
 
