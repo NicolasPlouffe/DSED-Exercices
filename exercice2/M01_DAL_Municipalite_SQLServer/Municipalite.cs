@@ -1,6 +1,5 @@
 ﻿using System;
-
-using SRVM = M01_Entite;
+using SRVM = M01_Srv_Municipalite;
 
 namespace M01_DAL_Municipalite_SQLServer
 {

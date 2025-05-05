@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-
-using Entite = M01_Entite;
+using M01_Srv_Municipalite;
 
 namespace M01_DAL_Municipalite_SQLServer
 {
-    public class DepotMunicipalitesSQLServer : Entite.IDepotMunicipalites
+    public class DepotMunicipalitesSQLServer : IDepotMunicipalites
     {
         private MunicipaliteContextSQLServer m_contexte;
 
@@ -20,7 +20,7 @@ namespace M01_DAL_Municipalite_SQLServer
             this.m_contexte = p_contexte;
         }
 
-        public void AjouterMunicipalite(Entite.Municipalite p_municipalite)
+        public void AjouterMunicipalite(M01_Srv_Municipalite.Municipalite p_municipalite)
         {
             if (p_municipalite is null)
             {
@@ -38,12 +38,12 @@ namespace M01_DAL_Municipalite_SQLServer
             }
         }
 
-        public Entite.Municipalite? ChercherMunicipaliteParCodeGeographique(int p_codeGeographique)
+        public M01_Srv_Municipalite.Municipalite? ChercherMunicipaliteParCodeGeographique(int p_codeGeographique)
         {
             return this.m_contexte.Municipalite.Where(m => m.MunicipaliteId == p_codeGeographique).Select(m => m.VersEntite()).SingleOrDefault();
         }
 
-        public void DesactiverMunicipalite(Entite.Municipalite p_municipalite)
+        public void DesactiverMunicipalite(M01_Srv_Municipalite.Municipalite p_municipalite)
         {
             if (p_municipalite is null)
             {
@@ -61,12 +61,12 @@ namespace M01_DAL_Municipalite_SQLServer
             this.m_contexte.SaveChanges();
         }
 
-        public IEnumerable<Entite.Municipalite> ListerMunicipalitesActives()
+        public IEnumerable<M01_Srv_Municipalite.Municipalite> ListerMunicipalitesActives()
         {
             return this.m_contexte.Municipalite.Where(m => m.Actif).Select(m => m.VersEntite()).ToList();
         }
 
-        public void MAJMunicipalite(Entite.Municipalite p_municipalite)
+        public void MAJMunicipalite(M01_Srv_Municipalite.Municipalite p_municipalite)
         {
             if (p_municipalite is null)
             {

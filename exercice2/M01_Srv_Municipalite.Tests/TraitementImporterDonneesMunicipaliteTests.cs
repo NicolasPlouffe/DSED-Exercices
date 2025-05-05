@@ -1,13 +1,10 @@
+using AutoFixture;
+using M01_Srv_Municipalite;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using AutoFixture;
-using Moq;
 using Xunit;
-
-using M01_Srv_Municipalite;
-using M01_Entite;
 
 namespace M01_Srv_Municipalite.Tests
 {

@@ -5,8 +5,4 @@
 	<Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\M01_Entite\M01_Entite.csproj" />
-  </ItemGroup>
-
 </Project>
