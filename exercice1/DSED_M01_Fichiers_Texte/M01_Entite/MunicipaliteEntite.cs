@@ -11,7 +11,7 @@ public class MunicipaliteEntite
     public DateTime? DateProchaineElection { get; set; }
 
 
-    public MunicipaliteEntite(int codeGeographique, string nomMunicipalite, string? adresseCourriel, string? adresseWeb, DateTime dateProchaineElection)
+    public MunicipaliteEntite(int codeGeographique, string nomMunicipalite, string? adresseCourriel, string? adresseWeb, DateTime? dateProchaineElection)
     {
         CodeGeographique = codeGeographique;
         NomMunicipalite = nomMunicipalite;
