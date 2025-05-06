@@ -1,11 +1,11 @@
 USE master;
 Go
 
-IF DB_ID ('municipalites') IS NULL
-CREATE DATABASE municipalites;
+IF DB_ID ('Municipalites') IS NULL
+CREATE DATABASE Municipalites;
 GO
 
-USE municipalites;
+USE Municipalites;
 GO
 
 CREATE TABLE municipalites (

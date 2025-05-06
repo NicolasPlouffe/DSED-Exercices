@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M01_DAL_Import_Munic_JSON",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M01_Entite", "M01_Entite\M01_Entite.csproj", "{97E85FCF-CB91-4F7A-8D17-AF82D573891F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M03_Web_Municipalites_REST01", "M03_Web_Municipalites_REST01\M03_Web_Municipalites_REST01.csproj", "{EF355FA2-62F2-45EF-BD40-C6FC7AABABEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{97E85FCF-CB91-4F7A-8D17-AF82D573891F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E85FCF-CB91-4F7A-8D17-AF82D573891F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E85FCF-CB91-4F7A-8D17-AF82D573891F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF355FA2-62F2-45EF-BD40-C6FC7AABABEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF355FA2-62F2-45EF-BD40-C6FC7AABABEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF355FA2-62F2-45EF-BD40-C6FC7AABABEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF355FA2-62F2-45EF-BD40-C6FC7AABABEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
