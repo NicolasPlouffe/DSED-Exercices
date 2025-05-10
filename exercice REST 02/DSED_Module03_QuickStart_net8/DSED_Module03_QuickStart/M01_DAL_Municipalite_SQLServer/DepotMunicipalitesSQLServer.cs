@@ -20,20 +20,20 @@ namespace M01_DAL_Municipalite_SQLServer
             this.m_contexte = p_contexte;
         }
 
-        public void AjouterMunicipalite(Entite.MunicipaliteEntite municipaliteEntite)
+        public void AjouterMunicipalite(Entite.MunicipaliteEntite p_municipaliteEntite)
         {
-            if (municipaliteEntite is null)
+            if (p_municipaliteEntite is null)
             {
-                throw new ArgumentNullException(nameof(municipaliteEntite));
+                throw new ArgumentNullException(nameof(p_municipaliteEntite));
             }
 
-            if (this.m_contexte.Municipalite.Any(m => m.MunicipaliteId == municipaliteEntite.CodeGeographique))
+            if (this.m_contexte.Municipalite.Any(m => m.MunicipaliteId == p_municipaliteEntite.CodeGeographique))
             {
-                MAJMunicipalite(municipaliteEntite);
+                MAJMunicipalite(p_municipaliteEntite);
             }
             else
             {
-                this.m_contexte.Municipalite.Add(new MunicipaliteDepot(municipaliteEntite));
+                this.m_contexte.Municipalite.Add(new MunicipaliteDepot(p_municipaliteEntite));
                 this.m_contexte.SaveChanges();
             }
         }

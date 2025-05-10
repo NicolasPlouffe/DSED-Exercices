@@ -64,21 +64,23 @@ public class MunicipalitesController : Controller
     
     //Delete
     
-    [HttpDelete("{id}")]
-    [ProducesResponseType(204)]
-    [ProducesResponseType(404)]
-    public IActionResult Delete(int id) Delete(int p_codeGeographique)
+    [HttpDelete("{p_codeGeographique}")]  // Matches parameter name
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult Delete(int p_codeGeographique)
     {
-        
-        
-        MunicipaliteEntite r_municipalite = _depotMunicipalites.ChercherMunicipaliteParCodeGeographique(p_codeGeographique);
-        if (r_municipalite == null)
+        MunicipaliteEntite municipalite = _depotMunicipalites
+            .ChercherMunicipaliteParCodeGeographique(p_codeGeographique);
+    
+        if (municipalite == null)
         {
-            return NotFound();
+            return NotFound();  // 404 if not found
         }
-        _depotMunicipalites.DesactiverMunicipalite(r_municipalite);
-        return NoContent();
+    
+        _depotMunicipalites.DesactiverMunicipalite(municipalite);
+        return NoContent();  // 204 for successful soft-delete
     }
+
     
     
 }
