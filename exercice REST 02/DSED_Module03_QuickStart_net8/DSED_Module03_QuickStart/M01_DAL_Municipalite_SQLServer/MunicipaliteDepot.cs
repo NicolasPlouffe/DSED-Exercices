@@ -16,19 +16,19 @@ namespace M01_DAL_Municipalite_SQLServer
 
         public MunicipaliteDepot() { ; }
 
-        public MunicipaliteDepot(SRVM.Municipalite p_municipalite)
+        public MunicipaliteDepot(SRVM.MunicipaliteEntite municipaliteEntite)
         {
-            this.MunicipaliteId = p_municipalite.CodeGeographique;
-            this.NomMunicipalite = p_municipalite.NomMunicipalite;
-            this.AdresseCourriel = p_municipalite.AdresseCourriel;
-            this.AdresseWeb = p_municipalite.AdresseWeb;
-            this.DateProchaineElection = p_municipalite.DateProchaineElection;
+            this.MunicipaliteId = municipaliteEntite.CodeGeographique;
+            this.NomMunicipalite = municipaliteEntite.NomMunicipalite;
+            this.AdresseCourriel = municipaliteEntite.AdresseCourriel;
+            this.AdresseWeb = municipaliteEntite.AdresseWeb;
+            this.DateProchaineElection = municipaliteEntite.DateProchaineElection;
             this.Actif = true;
         }
 
-        public SRVM.Municipalite VersEntite()
+        public SRVM.MunicipaliteEntite VersEntite()
         {
-            return new SRVM.Municipalite(
+            return new SRVM.MunicipaliteEntite(
                 this.MunicipaliteId,
                 this.NomMunicipalite,
                 this.AdresseCourriel,

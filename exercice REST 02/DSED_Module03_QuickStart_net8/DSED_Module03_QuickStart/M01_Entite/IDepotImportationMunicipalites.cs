@@ -2,6 +2,6 @@
 {
     public interface IDepotImportationMunicipalites
     {
-        IEnumerable<Municipalite> LireMunicipalites();
+        IEnumerable<MunicipaliteEntite> LireMunicipalites();
     }
 }

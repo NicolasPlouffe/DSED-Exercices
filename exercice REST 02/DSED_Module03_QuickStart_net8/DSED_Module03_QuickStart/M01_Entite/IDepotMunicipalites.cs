@@ -2,10 +2,10 @@
 {
     public interface IDepotMunicipalites
     {
-        public Municipalite? ChercherMunicipaliteParCodeGeographique(int p_codeGeographique);
-        public IEnumerable<Municipalite> ListerMunicipalitesActives();
-        public void DesactiverMunicipalite(Municipalite p_municipalite);
-        public void AjouterMunicipalite(Municipalite p_municipalite);
-        public void MAJMunicipalite(Municipalite p_municipalite);
+        public MunicipaliteEntite? ChercherMunicipaliteParCodeGeographique(int p_codeGeographique);
+        public IEnumerable<MunicipaliteEntite> ListerMunicipalitesActives();
+        public void DesactiverMunicipalite(MunicipaliteEntite municipaliteEntite);
+        public void AjouterMunicipalite(MunicipaliteEntite municipaliteEntite);
+        public void MAJMunicipalite(MunicipaliteEntite municipaliteEntite);
     }
 }

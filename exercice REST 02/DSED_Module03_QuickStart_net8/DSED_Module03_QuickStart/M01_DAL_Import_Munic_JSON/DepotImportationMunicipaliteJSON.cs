@@ -37,13 +37,13 @@ namespace M01_DAL_Import_Munic_JSON
             this.m_nomFichierAImporter = p_nomFichierAImporter;
         }
 
-        public IEnumerable<Municipalite> LireMunicipalites()
+        public IEnumerable<MunicipaliteEntite> LireMunicipalites()
         {
             string json = File.ReadAllText(this.m_nomFichierAImporter);
             Rootobject? root = JsonSerializer.Deserialize<Rootobject>(json);
 
             return root!.result!.records!.Select(m =>
-                new Municipalite(
+                new MunicipaliteEntite(
                                  int.Parse(m!.mcode!),
                                  m!.munnom!,
                                  m!.mcourriel,

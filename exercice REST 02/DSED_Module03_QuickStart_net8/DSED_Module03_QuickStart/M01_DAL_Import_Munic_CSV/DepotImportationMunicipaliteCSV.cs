@@ -41,9 +41,9 @@ namespace M01_DAL_Import_Munic_CSV
             this.m_nomFichierAImporter = p_nomFichierAImporter;
         }
 
-        public IEnumerable<Municipalite> LireMunicipalites()
+        public IEnumerable<MunicipaliteEntite> LireMunicipalites()
         {
-            List<Municipalite> municipalites = new List<Municipalite>();
+            List<MunicipaliteEntite> municipalites = new List<MunicipaliteEntite>();
 
             using (StreamReader sr = File.OpenText(this.m_nomFichierAImporter))
             {
@@ -61,7 +61,7 @@ namespace M01_DAL_Import_Munic_CSV
                             string[] colonnes = ligneCourante.Split(_separateurChamps);
                             DateOnly dateElections;
 
-                            Municipalite municipalite = new Municipalite(
+                            MunicipaliteEntite municipaliteEntite = new MunicipaliteEntite(
                             int.Parse(colonnes[0]),
                             colonnes[1],
                             !string.IsNullOrWhiteSpace(colonnes[7]) ? colonnes[7] : null,
@@ -69,7 +69,7 @@ namespace M01_DAL_Import_Munic_CSV
                             DateOnly.TryParseExact(colonnes[23], "yyyy-MM-dd", out dateElections) ? dateElections : null
                             );
 
-                            municipalites.Add(municipalite);
+                            municipalites.Add(municipaliteEntite);
                         }
                         catch (Exception ex)
                         {

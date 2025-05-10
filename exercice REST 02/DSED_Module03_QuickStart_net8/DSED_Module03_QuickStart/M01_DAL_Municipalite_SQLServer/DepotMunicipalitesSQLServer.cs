@@ -20,40 +20,40 @@ namespace M01_DAL_Municipalite_SQLServer
             this.m_contexte = p_contexte;
         }
 
-        public void AjouterMunicipalite(Entite.Municipalite p_municipalite)
+        public void AjouterMunicipalite(Entite.MunicipaliteEntite municipaliteEntite)
         {
-            if (p_municipalite is null)
+            if (municipaliteEntite is null)
             {
-                throw new ArgumentNullException(nameof(p_municipalite));
+                throw new ArgumentNullException(nameof(municipaliteEntite));
             }
 
-            if (this.m_contexte.Municipalite.Any(m => m.MunicipaliteId == p_municipalite.CodeGeographique))
+            if (this.m_contexte.Municipalite.Any(m => m.MunicipaliteId == municipaliteEntite.CodeGeographique))
             {
-                MAJMunicipalite(p_municipalite);
+                MAJMunicipalite(municipaliteEntite);
             }
             else
             {
-                this.m_contexte.Municipalite.Add(new MunicipaliteDepot(p_municipalite));
+                this.m_contexte.Municipalite.Add(new MunicipaliteDepot(municipaliteEntite));
                 this.m_contexte.SaveChanges();
             }
         }
 
-        public Entite.Municipalite? ChercherMunicipaliteParCodeGeographique(int p_codeGeographique)
+        public Entite.MunicipaliteEntite? ChercherMunicipaliteParCodeGeographique(int p_codeGeographique)
         {
             return this.m_contexte.Municipalite.Where(m => m.MunicipaliteId == p_codeGeographique).Select(m => m.VersEntite()).SingleOrDefault();
         }
 
-        public void DesactiverMunicipalite(Entite.Municipalite p_municipalite)
+        public void DesactiverMunicipalite(Entite.MunicipaliteEntite municipaliteEntite)
         {
-            if (p_municipalite is null)
+            if (municipaliteEntite is null)
             {
-                throw new ArgumentNullException(nameof(p_municipalite));
+                throw new ArgumentNullException(nameof(municipaliteEntite));
             }
 
-            MunicipaliteDepot? m = this.m_contexte.Municipalite.Where(m => m.MunicipaliteId == p_municipalite.CodeGeographique).SingleOrDefault();
+            MunicipaliteDepot? m = this.m_contexte.Municipalite.Where(m => m.MunicipaliteId == municipaliteEntite.CodeGeographique).SingleOrDefault();
             if (m is null)
             {
-                throw new InvalidOperationException($"La municipalité d'identifiant {p_municipalite.CodeGeographique} n'existe pas dans le dépôt de données.");
+                throw new InvalidOperationException($"La municipalité d'identifiant {municipaliteEntite.CodeGeographique} n'existe pas dans le dépôt de données.");
             }
 
             m.Actif = false;
@@ -61,24 +61,24 @@ namespace M01_DAL_Municipalite_SQLServer
             this.m_contexte.SaveChanges();
         }
 
-        public IEnumerable<Entite.Municipalite> ListerMunicipalitesActives()
+        public IEnumerable<Entite.MunicipaliteEntite> ListerMunicipalitesActives()
         {
             return this.m_contexte.Municipalite.Where(m => m.Actif).Select(m => m.VersEntite()).ToList();
         }
 
-        public void MAJMunicipalite(Entite.Municipalite p_municipalite)
+        public void MAJMunicipalite(Entite.MunicipaliteEntite municipaliteEntite)
         {
-            if (p_municipalite is null)
+            if (municipaliteEntite is null)
             {
-                throw new ArgumentNullException(nameof(p_municipalite));
+                throw new ArgumentNullException(nameof(municipaliteEntite));
             }
 
-            if (!this.m_contexte.Municipalite.Any(m => m.MunicipaliteId == p_municipalite.CodeGeographique))
+            if (!this.m_contexte.Municipalite.Any(m => m.MunicipaliteId == municipaliteEntite.CodeGeographique))
             {
-                throw new InvalidOperationException($"La municipalité d'identifiant {p_municipalite.CodeGeographique} n'existe pas dans le dépôt de données.");
+                throw new InvalidOperationException($"La municipalité d'identifiant {municipaliteEntite.CodeGeographique} n'existe pas dans le dépôt de données.");
             }
 
-            MunicipaliteDepot municipaliteDepot = new MunicipaliteDepot(p_municipalite);
+            MunicipaliteDepot municipaliteDepot = new MunicipaliteDepot(municipaliteEntite);
             this.m_contexte.Municipalite.Update(municipaliteDepot);
             this.m_contexte.SaveChanges();
         }

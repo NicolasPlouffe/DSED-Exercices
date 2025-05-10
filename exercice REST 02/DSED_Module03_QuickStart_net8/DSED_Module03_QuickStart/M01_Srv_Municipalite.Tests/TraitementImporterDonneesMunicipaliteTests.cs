@@ -27,11 +27,11 @@ namespace M01_Srv_Municipalite.Tests
                 NombreEnregistrementsNonModifies = 0,
                 NombreMunicipalitesImportees = 10
             };
-            List<Municipalite> municipalitesAImporter =
+            List<MunicipaliteEntite> municipalitesAImporter =
             Enumerable.Range(0, sidAttendues.NombreMunicipalitesImportees)
-            .Select(i => fixture.Create<Municipalite>())
+            .Select(i => fixture.Create<MunicipaliteEntite>())
             .ToList();
-            List<Municipalite> municipalitesActuelles = new List<Municipalite>();
+            List<MunicipaliteEntite> municipalitesActuelles = new List<MunicipaliteEntite>();
 
             Mock<IDepotImportationMunicipalites> mockDepotImportationMunicipalites = new Mock<IDepotImportationMunicipalites>();
             mockDepotImportationMunicipalites
@@ -61,7 +61,7 @@ namespace M01_Srv_Municipalite.Tests
             Assert.Equal(sidAttendues.NombreMunicipalitesImportees, sid.NombreMunicipalitesImportees);
 
             mockDepotImportationMunicipalites.Verify(dim => dim.LireMunicipalites(), Times.Once);
-            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<Municipalite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
+            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
             mockDepotMunicipalites.Verify(dm => dm.ListerMunicipalitesActives(), Times.Once);
             mockDepotMunicipalites.VerifyNoOtherCalls();
         }
@@ -81,11 +81,11 @@ namespace M01_Srv_Municipalite.Tests
                 NombreMunicipalitesImportees = 10
             };
 
-            List<Municipalite> municipalitesAImporter =
+            List<MunicipaliteEntite> municipalitesAImporter =
             Enumerable.Range(0, sidAttendues.NombreMunicipalitesImportees)
-            .Select(i => fixture.Create<Municipalite>()).ToList();
+            .Select(i => fixture.Create<MunicipaliteEntite>()).ToList();
 
-            List<Municipalite> municipalitesActuelles = new List<Municipalite>()
+            List<MunicipaliteEntite> municipalitesActuelles = new List<MunicipaliteEntite>()
             {
                 municipalitesAImporter[2],
                 municipalitesAImporter[9],
@@ -123,7 +123,7 @@ namespace M01_Srv_Municipalite.Tests
             Assert.Equal(sidAttendues.NombreMunicipalitesImportees, sid.NombreMunicipalitesImportees);
 
             mockDepotImportationMunicipalites.Verify(dim => dim.LireMunicipalites(), Times.Once);
-            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<Municipalite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
+            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
             mockDepotMunicipalites.Verify(dm => dm.ListerMunicipalitesActives(), Times.Once);
             mockDepotMunicipalites.VerifyNoOtherCalls();
         }
@@ -143,18 +143,18 @@ namespace M01_Srv_Municipalite.Tests
                 NombreMunicipalitesImportees = 10
             };
 
-            List<Municipalite> municipalitesAImporter =
+            List<MunicipaliteEntite> municipalitesAImporter =
             Enumerable.Range(0, sidAttendues.NombreMunicipalitesImportees)
-                .Select(i => fixture.Create<Municipalite>())
+                .Select(i => fixture.Create<MunicipaliteEntite>())
                 .ToList();
 
-            List<Municipalite> municipalitesActuelles = new List<Municipalite>()
+            List<MunicipaliteEntite> municipalitesActuelles = new List<MunicipaliteEntite>()
             {
                 municipalitesAImporter[2],
                 municipalitesAImporter[9],
                 municipalitesAImporter[1],
-                fixture.Create<Municipalite>(),
-                fixture.Create<Municipalite>()
+                fixture.Create<MunicipaliteEntite>(),
+                fixture.Create<MunicipaliteEntite>()
             };
 
             Mock<IDepotImportationMunicipalites> mockDepotImportationMunicipalites = new Mock<IDepotImportationMunicipalites>();
@@ -188,8 +188,8 @@ namespace M01_Srv_Municipalite.Tests
             Assert.Equal(sidAttendues.NombreMunicipalitesImportees, sid.NombreMunicipalitesImportees);
 
             mockDepotImportationMunicipalites.Verify(dim => dim.LireMunicipalites(), Times.Once);
-            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<Municipalite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
-            mockDepotMunicipalites.Verify(dm => dm.DesactiverMunicipalite(It.IsAny<Municipalite>()), Times.Exactly(sidAttendues.NombreEnregistrementsDesactives));
+            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
+            mockDepotMunicipalites.Verify(dm => dm.DesactiverMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Exactly(sidAttendues.NombreEnregistrementsDesactives));
             mockDepotMunicipalites.Verify(dm => dm.ListerMunicipalitesActives(), Times.Once);
             mockDepotMunicipalites.VerifyNoOtherCalls();
         }
@@ -209,25 +209,25 @@ namespace M01_Srv_Municipalite.Tests
                 NombreMunicipalitesImportees = 10
             };
 
-            List<Municipalite> municipalitesAImporter =
+            List<MunicipaliteEntite> municipalitesAImporter =
             Enumerable.Range(0, sidAttendues.NombreMunicipalitesImportees)
-                .Select(i => fixture.Create<Municipalite>())
+                .Select(i => fixture.Create<MunicipaliteEntite>())
                 .ToList();
 
-            List<Municipalite> municipalitesActuelles = new List<Municipalite>()
+            List<MunicipaliteEntite> municipalitesActuelles = new List<MunicipaliteEntite>()
             {
                 municipalitesAImporter[2],
                 municipalitesAImporter[0],
                 municipalitesAImporter[9],
-                new Municipalite(
+                new MunicipaliteEntite(
                     municipalitesAImporter[1].CodeGeographique,
                     municipalitesAImporter[1].NomMunicipalite,
                     municipalitesAImporter[1].AdresseCourriel,
                     municipalitesAImporter[1].AdresseWeb,
                     municipalitesAImporter[1].DateProchaineElection?.AddDays(10)
                 ),
-                fixture.Create<Municipalite>(),
-                fixture.Create<Municipalite>()
+                fixture.Create<MunicipaliteEntite>(),
+                fixture.Create<MunicipaliteEntite>()
             };
 
             Mock<IDepotImportationMunicipalites> mockDepotImportationMunicipalites = new Mock<IDepotImportationMunicipalites>();
@@ -261,10 +261,10 @@ namespace M01_Srv_Municipalite.Tests
             Assert.Equal(sidAttendues.NombreMunicipalitesImportees, sid.NombreMunicipalitesImportees);
 
             mockDepotImportationMunicipalites.Verify(dim => dim.LireMunicipalites(), Times.Once);
-            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<Municipalite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
-            mockDepotMunicipalites.Verify(dm => dm.DesactiverMunicipalite(It.IsAny<Municipalite>()), Times.Exactly(sidAttendues.NombreEnregistrementsDesactives));
+            mockDepotMunicipalites.Verify(dm => dm.AjouterMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Exactly(sidAttendues.NombreEnregistrementsAjoutes));
+            mockDepotMunicipalites.Verify(dm => dm.DesactiverMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Exactly(sidAttendues.NombreEnregistrementsDesactives));
             mockDepotMunicipalites.Verify(dm => dm.ListerMunicipalitesActives(), Times.Once);
-            mockDepotMunicipalites.Verify(dm => dm.MAJMunicipalite(It.IsAny<Municipalite>()), Times.Once);
+            mockDepotMunicipalites.Verify(dm => dm.MAJMunicipalite(It.IsAny<MunicipaliteEntite>()), Times.Once);
             mockDepotMunicipalites.VerifyNoOtherCalls();
         }
     }

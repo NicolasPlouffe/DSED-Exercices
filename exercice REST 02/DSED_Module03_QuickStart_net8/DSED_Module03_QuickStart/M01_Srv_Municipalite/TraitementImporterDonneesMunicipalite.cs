@@ -18,19 +18,19 @@ namespace M01_Srv_Municipalite
         public StatistiquesImportationDonnees Executer()
         {
             StatistiquesImportationDonnees stats = new StatistiquesImportationDonnees();
-            Dictionary<int, Municipalite > municipalitesImportees = 
+            Dictionary<int, MunicipaliteEntite > municipalitesImportees = 
                 this.m_depotImportationMunicipalites
                     .LireMunicipalites()
                     .ToDictionary(m => m.CodeGeographique);
-            Dictionary<int, Municipalite> municipalitesBD = 
+            Dictionary<int, MunicipaliteEntite> municipalitesBD = 
                 this.m_depotMunicipalites
                     .ListerMunicipalitesActives()
                     .ToDictionary(m => m.CodeGeographique);
 
 
-            foreach (Municipalite municipaliteImportee in municipalitesImportees.Values)
+            foreach (MunicipaliteEntite municipaliteImportee in municipalitesImportees.Values)
             {
-                Municipalite? municipaliteDuDepot = municipalitesBD.GetValueOrDefault(municipaliteImportee.CodeGeographique);
+                MunicipaliteEntite? municipaliteDuDepot = municipalitesBD.GetValueOrDefault(municipaliteImportee.CodeGeographique);
 
                 if (municipaliteDuDepot is null)
                 {
@@ -52,13 +52,13 @@ namespace M01_Srv_Municipalite
                 ++stats.NombreMunicipalitesImportees;
             }
 
-            IEnumerable<Municipalite> municipalitesADesactiver = 
+            IEnumerable<MunicipaliteEntite> municipalitesADesactiver = 
                 municipalitesBD.Values
                                .Where(m => 
                                       !municipalitesImportees.ContainsKey(m.CodeGeographique)
                                      );
 
-            foreach (Municipalite municipalite in municipalitesADesactiver)
+            foreach (MunicipaliteEntite municipalite in municipalitesADesactiver)
             {
                 this.m_depotMunicipalites.DesactiverMunicipalite(municipalite);
                 ++stats.NombreEnregistrementsDesactives;
