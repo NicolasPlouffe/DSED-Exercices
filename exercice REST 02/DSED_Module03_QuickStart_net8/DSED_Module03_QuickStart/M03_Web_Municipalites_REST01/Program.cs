@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-string connectionString = builder.Configuration.GetConnectionString("BDMunicipalites") ?? throw new InvalidOperationException("Connection string 'PersonnesConnection' not found.");
+string connectionString = builder.Configuration.GetConnectionString("Municipalite") ?? throw new InvalidOperationException("Connection string 'PersonnesConnection' not found.");
 
 builder.Services.AddDbContext<MunicipaliteContextSQLServer>(options =>
 {
