@@ -10,6 +10,6 @@ namespace M01_DAL_Municipalite_SQLServer
             ;
         }
 
-        public DbSet<Municipalite> Municipalite { get; set; }
+        public DbSet<MunicipaliteDepot> Municipalite { get; set; }
     }
 }

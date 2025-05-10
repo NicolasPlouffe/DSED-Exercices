@@ -33,7 +33,7 @@ namespace M01_DAL_Municipalite_SQLServer
             }
             else
             {
-                this.m_contexte.Municipalite.Add(new Municipalite(p_municipalite));
+                this.m_contexte.Municipalite.Add(new MunicipaliteDepot(p_municipalite));
                 this.m_contexte.SaveChanges();
             }
         }
@@ -50,7 +50,7 @@ namespace M01_DAL_Municipalite_SQLServer
                 throw new ArgumentNullException(nameof(p_municipalite));
             }
 
-            Municipalite? m = this.m_contexte.Municipalite.Where(m => m.MunicipaliteId == p_municipalite.CodeGeographique).SingleOrDefault();
+            MunicipaliteDepot? m = this.m_contexte.Municipalite.Where(m => m.MunicipaliteId == p_municipalite.CodeGeographique).SingleOrDefault();
             if (m is null)
             {
                 throw new InvalidOperationException($"La municipalité d'identifiant {p_municipalite.CodeGeographique} n'existe pas dans le dépôt de données.");
@@ -78,8 +78,8 @@ namespace M01_DAL_Municipalite_SQLServer
                 throw new InvalidOperationException($"La municipalité d'identifiant {p_municipalite.CodeGeographique} n'existe pas dans le dépôt de données.");
             }
 
-            Municipalite municipalite = new Municipalite(p_municipalite);
-            this.m_contexte.Municipalite.Update(municipalite);
+            MunicipaliteDepot municipaliteDepot = new MunicipaliteDepot(p_municipalite);
+            this.m_contexte.Municipalite.Update(municipaliteDepot);
             this.m_contexte.SaveChanges();
         }
     }

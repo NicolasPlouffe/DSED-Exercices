@@ -5,7 +5,7 @@ using SRVM = M01_Entite;
 namespace M01_DAL_Municipalite_SQLServer
 {
     // DTO
-    public class Municipalite
+    public class MunicipaliteDepot
     {
         public int MunicipaliteId { get; set; } = 0;
         public string NomMunicipalite { get; set; } = string.Empty;
@@ -14,9 +14,9 @@ namespace M01_DAL_Municipalite_SQLServer
         public DateOnly? DateProchaineElection { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public bool Actif { get; set; }
 
-        public Municipalite() { ; }
+        public MunicipaliteDepot() { ; }
 
-        public Municipalite(SRVM.Municipalite p_municipalite)
+        public MunicipaliteDepot(SRVM.Municipalite p_municipalite)
         {
             this.MunicipaliteId = p_municipalite.CodeGeographique;
             this.NomMunicipalite = p_municipalite.NomMunicipalite;

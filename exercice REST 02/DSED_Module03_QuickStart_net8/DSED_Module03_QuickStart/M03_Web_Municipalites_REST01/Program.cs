@@ -28,6 +28,10 @@ builder.Services.AddScoped<IDepotMunicipalites, DepotMunicipalitesSQLServer>();
 builder.Services.Configure<DepotImportationMunicipaliteOptions>(builder.Configuration.GetSection("ImportationMunicipalites"));
 builder.Services.AddScoped<TraitementImporterDonneesMunicipalite>();
 
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddSwaggerDocument();
+
 DepotImportationMunicipaliteOptions depotImportationMunicipaliteOptions = builder.Configuration.GetSection("ImportationMunicipalites").Get<DepotImportationMunicipaliteOptions>() ?? throw new InvalidOperationException("ImportationMunicipalites section not found.");
 switch (Path.GetExtension(depotImportationMunicipaliteOptions.FilePath))
 {
@@ -58,6 +62,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -65,8 +75,18 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapRazorPages();
+});
+   
+app.UseOpenApi();
+app.UseSwaggerUi();
 
 app.Run();
