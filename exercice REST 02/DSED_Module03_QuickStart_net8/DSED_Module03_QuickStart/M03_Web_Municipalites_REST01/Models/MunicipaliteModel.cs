@@ -32,8 +32,7 @@ public class MunicipaliteModel
             this.NomMunicipalite,
             this.AdresseCourriel,
             this.AdresseWeb,
-            this.DateProchaineElection,
-            this.Actif
+            this.DateProchaineElection
         );
     }
 }

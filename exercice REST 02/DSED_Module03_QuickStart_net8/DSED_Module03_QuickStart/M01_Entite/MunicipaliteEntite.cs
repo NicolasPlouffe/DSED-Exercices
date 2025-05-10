@@ -10,15 +10,14 @@
 
         public bool Actif { get; set; } 
 
-        public MunicipaliteEntite(int p_codeGeographique, string p_nomMunicipalite, string? p_adresseCourriel, string? p_adresseWeb, DateOnly? p_dateProchaineElection, bool p_actif)
+        public MunicipaliteEntite(int p_codeGeographique, string p_nomMunicipalite, string? p_adresseCourriel, string? p_adresseWeb, DateOnly? p_dateProchaineElection)
         {
             this.CodeGeographique = p_codeGeographique;
             this.NomMunicipalite = p_nomMunicipalite;
             this.AdresseCourriel = p_adresseCourriel;
             this.AdresseWeb = p_adresseWeb;
             this.DateProchaineElection = p_dateProchaineElection;
-            this.Actif=p_actif;
-        }
+            }
 
         public override bool Equals(object? obj)
         {
@@ -30,7 +29,6 @@
                    && string.Compare(this.AdresseCourriel, objAComparer.AdresseCourriel) == 0
                    && string.Compare(this.AdresseWeb, objAComparer.AdresseWeb) == 0
                    && this.DateProchaineElection == objAComparer.DateProchaineElection
-                   && this.Actif == objAComparer.Actif; ;
                    ;
         }
 
