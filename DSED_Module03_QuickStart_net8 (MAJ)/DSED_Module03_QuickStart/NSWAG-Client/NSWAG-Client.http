@@ -1,0 +1,6 @@
+@NSWAG_Client_HostAddress = http://localhost:5068
+
+GET {{NSWAG_Client_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

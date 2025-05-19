@@ -59,14 +59,14 @@ namespace M01_DAL_Import_Munic_CSV
                         {
                             ligneCourante = ligneCourante.Substring(1, ligneCourante.Length - 2);
                             string[] colonnes = ligneCourante.Split(_separateurChamps);
-                            DateOnly dateElections;
+                            DateTime dateElections;
 
                             MunicipaliteEntite municipaliteEntite = new MunicipaliteEntite(
                             int.Parse(colonnes[0]),
                             colonnes[1],
                             !string.IsNullOrWhiteSpace(colonnes[7]) ? colonnes[7] : null,
                             !string.IsNullOrWhiteSpace(colonnes[8]) ? colonnes[8] : null,
-                            DateOnly.TryParseExact(colonnes[23], "yyyy-MM-dd", out dateElections) ? dateElections : null
+                            DateTime.TryParseExact(colonnes[23], "yyyy-MM-dd", null) ?  
                             );
 
                             municipalites.Add(municipaliteEntite);

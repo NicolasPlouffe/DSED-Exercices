@@ -1,17 +1,20 @@
-﻿using System;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using SRVM = M01_Entite;
 
-using SRVM = M01_Entite;
-
-namespace M01_DAL_Municipalite_SQLServer
+namespace M01_DAL_Municipalite_SQLServer
 {
-    // DTO
-    public class MunicipaliteDepot
+    [Table(("municipalites"))]
+    public class MunicipaliteDepot
     {
+        [Key]
+        [Column("CodeGeographique")] 
         public int MunicipaliteId { get; set; } = 0;
         public string NomMunicipalite { get; set; } = string.Empty;
         public string? AdresseCourriel { get; set; }
         public string? AdresseWeb { get; set; }
-        public DateOnly? DateProchaineElection { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public DateTime? DateProchaineElection { get; set; } 
         public bool Actif { get; set; }
 
         public MunicipaliteDepot() { ; }
@@ -33,7 +36,7 @@ namespace M01_DAL_Municipalite_SQLServer
                 this.NomMunicipalite,
                 this.AdresseCourriel,
                 this.AdresseWeb,
-                this.DateProchaineElection
+                this.DateProchaineElection 
             );
         }
     }

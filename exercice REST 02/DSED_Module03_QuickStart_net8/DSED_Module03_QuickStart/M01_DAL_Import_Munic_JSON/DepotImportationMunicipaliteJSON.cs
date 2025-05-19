@@ -48,9 +48,8 @@ namespace M01_DAL_Import_Munic_JSON
                                  m!.munnom!,
                                  m!.mcourriel,
                                  m!.mweb,
-                                 m!.datelec is not null ? DateOnly.FromDateTime(m.datelec.Value) : null
-
-                )
+                                 m!.datelec
+                                 )
             ).ToList();
         }
 
