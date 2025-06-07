@@ -13,7 +13,7 @@ namespace DSED_M05_Client
             Thread.Sleep(5000);
             
             Binding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(new Uri("http://localhost:5135/OperationService.svc"));
+            EndpointAddress endpoint = new EndpointAddress(new Uri("http://localhost:5135/OperationService.asmx"));
             ChannelFactory<IOperationsService> channelFactory = new ChannelFactory<IOperationsService>(binding, endpoint);
             IOperationsService operationsService = channelFactory.CreateChannel();
 

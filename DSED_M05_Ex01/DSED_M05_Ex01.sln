@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED_M05_Ex01-Serveur", "DSED_M05_Ex01-Serveur\DSED_M05_Ex01-Serveur.csproj", "{03EA16AE-665C-443A-B6CE-E2577367274A}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSED_M05_Ex01-Serveur", "DSED_M05_Ex01-Serveur\DSED_M05_Ex01-Serveur.csproj", "{03EA16AE-665C-443A-B6CE-E2577367274A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED_M05_Model", "DSED_M05_Model\DSED_M05_Model.csproj", "{203CF464-CB98-4F3B-A9B7-F5C93365E8F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSED_M05_Model", "DSED_M05_Model\DSED_M05_Model.csproj", "{203CF464-CB98-4F3B-A9B7-F5C93365E8F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED_M05_Client", "DSED_M05_Client\DSED_M05_Client.csproj", "{3EF5BDE6-ED7A-4381-9918-D3E3209B7C08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSED_M05_Client", "DSED_M05_Client\DSED_M05_Client.csproj", "{3EF5BDE6-ED7A-4381-9918-D3E3209B7C08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,11 @@ Global
 		{3EF5BDE6-ED7A-4381-9918-D3E3209B7C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF5BDE6-ED7A-4381-9918-D3E3209B7C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF5BDE6-ED7A-4381-9918-D3E3209B7C08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF8C8B47-BDC7-4F12-BC4A-79A09F9E36A8}
 	EndGlobalSection
 EndGlobal

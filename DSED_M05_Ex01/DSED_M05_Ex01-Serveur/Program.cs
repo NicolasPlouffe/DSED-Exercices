@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IOperationsService, OperationsService>();
 builder.Services.AddSoapCore();
 
+
 var app = builder.Build();
 
 app.UseSoapEndpoint<IOperationsService>("/OperationService.svc", new SoapEncoderOptions());
@@ -21,7 +22,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -32,7 +33,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.UseSoapEndpoint<IOperationsService>(opt =>
     {
-        opt.Path = "/OperationService.asmx ";
+        opt.Path = "/OperationService.asmx";
         opt.SoapSerializer = SoapSerializer.DataContractSerializer;
     });
 
