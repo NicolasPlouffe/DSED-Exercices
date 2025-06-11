@@ -3,16 +3,14 @@ namespace Entite.IDepot;
 
 public interface ICompte
 {
-    // Create
+    // Create Post
     void CreerCompte(CompteEntite p_compte);
     
-    // Read
-    CompteEntite AfficherCompte(Guid p_id_compte);
+    // Read Get
     
-    // Update
+    // Updat Put 
     void MAJCompte(CompteEntite p_compte);
     
-    //Delete
-    void SupprimerCompte(Guid p_id_compte);
+ 
     
 }

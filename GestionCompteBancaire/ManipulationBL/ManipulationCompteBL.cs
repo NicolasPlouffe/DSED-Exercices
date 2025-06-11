@@ -1,6 +1,6 @@
 namespace Entite.Manipulations;
 
-public class ManipulationCompte
+public class ManipulationCompteBL
 {
     
 }

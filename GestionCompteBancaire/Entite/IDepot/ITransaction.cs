@@ -7,12 +7,6 @@ public interface ITransaction
     
       // Read Get
       TransactionEntite LireTransaction();
-        List<TransactionEntite> ListerToutesLesTransactions();
-      
-      // Update
-    void MAJTransaction(TransactionEntite transaction);
-    
-    //Delete
-    void SupprimerTransaction();
+      List<TransactionEntite> ListerToutesLesTransactions();
     
 }
