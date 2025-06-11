@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entite", "Entite\Entite.csproj", "{486ADBD5-E760-4467-9E17-D96C40090E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{8EDE2519-87A5-4245-8625-AA0676FB2545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manipulation", "Manipulation\Manipulation.csproj", "{0790B5F8-2178-4F6C-A905-E0D79D613373}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{486ADBD5-E760-4467-9E17-D96C40090E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486ADBD5-E760-4467-9E17-D96C40090E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486ADBD5-E760-4467-9E17-D96C40090E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486ADBD5-E760-4467-9E17-D96C40090E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDE2519-87A5-4245-8625-AA0676FB2545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDE2519-87A5-4245-8625-AA0676FB2545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDE2519-87A5-4245-8625-AA0676FB2545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDE2519-87A5-4245-8625-AA0676FB2545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
