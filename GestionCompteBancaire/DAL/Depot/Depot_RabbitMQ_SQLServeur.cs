@@ -1,9 +1,9 @@
 using Entite;
 
-namespace ClassLibrary1;
+namespace DAL;
 using Entite.IDepot;
 
-public class Depot_RabbitMQ_SQLServeur:ICompte,ITransaction
+public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
 {
     #region Compte
     

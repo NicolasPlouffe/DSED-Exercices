@@ -1,6 +1,6 @@
 namespace Entite.IDepot;
 
-public interface ITransaction
+public interface ITransactionDepot
 {
     // Create Post
     void CreerTransaction();

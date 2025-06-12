@@ -1,9 +1,9 @@
 ﻿using Entite;
 using Entite.IDepot;
 
-namespace ClassLibrary1;
+namespace DAL;
 
-public class Depot_SQLServeur:ICompte,ITransaction
+public class Depot_SQLServeur:ICompteDepot,ITransactionDepot
 {
     #region Compte
     public void CreerCompte(CompteEntite p_compte)

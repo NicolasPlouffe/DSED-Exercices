@@ -1,7 +1,7 @@
 namespace Entite.IDepot;
 
 
-public interface ICompte
+public interface ICompteDepot
 {
     // Create Post
     void CreerCompte(CompteEntite p_compte);
