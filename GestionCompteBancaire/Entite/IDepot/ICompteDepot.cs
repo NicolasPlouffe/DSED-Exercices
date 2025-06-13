@@ -7,7 +7,7 @@ public interface ICompteDepot
     void CreerCompte(CompteEntite p_compte);
     
     // Read Get
-    
+    CompteEntite ObtenirCompte(Guid p_compteId);
     // Updat Put 
     void MAJCompte(CompteEntite p_compte);
     

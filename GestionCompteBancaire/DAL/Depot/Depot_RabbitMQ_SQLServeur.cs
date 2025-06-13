@@ -12,6 +12,11 @@ public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
         throw new NotImplementedException();
     }
 
+    public CompteEntite ObtenirCompte(Guid p_compteId)
+    {
+        throw new NotImplementedException();
+    }
+
     public void MAJCompte(CompteEntite p_compte)
     {
         throw new NotImplementedException();

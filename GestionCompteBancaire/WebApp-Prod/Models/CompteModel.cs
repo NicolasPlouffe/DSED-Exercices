@@ -1,49 +1,53 @@
-using Entite.IDepot;
-namespace ClassLibrary1.DTO;
 using Entite;
-public class DTO_Compte
+using Entite.IDepot;
+
+namespace WebApplication1.Models;
+
+public class CompteModel
 {
-    #region Proprietes
+    #region Properties
+    
     public Guid NumeroCompte { get; set; }
     public TypeCompte TypeCompte { get; set; }
-    public List<DTO_Transaction> ListTransactions { get; set; }
+    public List<TransactionModel>? ListTransactions { get; set; }
+    
     #endregion
     
-    #region Constructeurs
+    #region Constructor
 
-    public DTO_Compte()
+    public CompteModel()
     {
         ;
     }
-
-    public DTO_Compte( CompteEntite p_compte)
+    
+    public CompteModel(CompteEntite p_compte)
     {
         this.NumeroCompte = p_compte.NumeroCompte;
         this.TypeCompte = p_compte.TypeCompte;
+        
         foreach (var transaction in p_compte.ListTransactions)
         {
-            this.ListTransactions.Add(new DTO_Transaction(transaction));
+            this.ListTransactions.Add(new TransactionModel(transaction));
         }
     }
-    
     #endregion
+    
+    
+    #region Methods
 
-    #region Methodes
-
-    public CompteEntite VersEntite()
+    public CompteEntite VerEntite()
     {
         List<TransactionEntite> listTransactions = new List<TransactionEntite>();
-
+        
         foreach (var item in this.ListTransactions)
         {
             listTransactions.Add(item.VersEntite());
         }
-        
+
         return new CompteEntite(
             this.NumeroCompte,
             this.TypeCompte,
             listTransactions);
     }
-    
     #endregion
 }

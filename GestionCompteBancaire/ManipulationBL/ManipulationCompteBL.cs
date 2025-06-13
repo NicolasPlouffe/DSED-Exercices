@@ -1,7 +1,7 @@
 namespace Entite.Manipulations;
 using Entite;
 using Entite.IDepot;
-public class ManipulationCompteBL
+public class ManipulationCompteBL: IDisposable
 {
 
     #region variables & const
@@ -30,5 +30,9 @@ public class ManipulationCompteBL
     #region methods
     
     #endregion
-    
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
 }
