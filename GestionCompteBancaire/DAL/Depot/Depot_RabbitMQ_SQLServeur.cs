@@ -24,12 +24,12 @@ public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
     #endregion
     
     #region Transaction
-    public void CreerTransaction()
+    public void CreerTransaction(TransactionEntite p_transaction)
     {
         throw new NotImplementedException();
     }
 
-    public TransactionEntite LireTransaction()
+    public TransactionEntite LireTransaction(Guid p_transactionId)
     {
         throw new NotImplementedException();
     }
@@ -38,6 +38,11 @@ public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
     {
         throw new NotImplementedException();
     }
-    
+
+    public void MAJTransaction(TransactionEntite p_transaction)
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 }
