@@ -1,5 +1,5 @@
 using Entite.IDepot;
-namespace ClassLibrary1.DTO;
+namespace DAL.DTO;
 using Entite;
 public class DTO_Compte
 {
