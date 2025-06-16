@@ -1,25 +1,25 @@
 using System.Transactions;
-
-namespace DAL.DTO;
 using Entite;
-public class DTO_Transaction
+namespace WebApplication1.Models;
+
+public class TransactionModel
 {
-    #region Proprietes
+    #region Properties
+    
     public Guid TransactionId { get; set; }
     public TypeTransaction Type { get; set; }
     public DateOnly DateTransaction { get; set; }
     public decimal Montant { get; set; }
+    
     #endregion
+    
+    #region Constructor
 
-
-    #region Constructeurs
-
-    public DTO_Transaction()
+    public TransactionModel()
     {
         ;
     }
-
-    public DTO_Transaction(TransactionEntite p_transaction)
+    public TransactionModel(TransactionEntite p_transaction)
     {
         this.TransactionId = p_transaction.TransactionId;
         this.Type = p_transaction.Type;
@@ -27,8 +27,9 @@ public class DTO_Transaction
         this.Montant = p_transaction.Montant;
     }
     #endregion
-
-    #region Methodes
+    
+    
+    #region Methods
 
     public TransactionEntite VersEntite()
     {
@@ -36,11 +37,8 @@ public class DTO_Transaction
             this.TransactionId,
             this.Type,
             this.DateTransaction,
-            this.Montant
-        );
+            this.Montant);
     }
     
     #endregion
-    
-    
 }
