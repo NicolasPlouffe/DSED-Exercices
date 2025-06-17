@@ -3,6 +3,8 @@ using Entite.IDepot;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using WebApplication1.Models;
+using DAL;
+
 
 namespace WebApplication1.Controllers;
 
@@ -10,14 +12,15 @@ namespace WebApplication1.Controllers;
 [Route("api/compte")]
 public class CompteController:Controller
 {
-    private readonly ICompteDepot _compteDepot;
+    private readonly ICompteDepot _compteDepotLecture;
     private readonly ITransactionDepot _transactionDepot;
-
+    private readonly string _rabbitMQHost = "localhost";
+    
     public CompteController(
-        ICompteDepot compteDepot, 
+        ICompteDepot compteDepotLecture, 
         ITransactionDepot transactionDepot)
     {
-        this._compteDepot = compteDepot;
+        this._compteDepotLecture = compteDepotLecture;
         this._transactionDepot = transactionDepot;
     }
 
@@ -37,7 +40,7 @@ public class CompteController:Controller
             return BadRequest(ModelState);
         }
         CompteEntite m_compte = p_compte.VerEntite();
-        _compteDepot.CreerCompte(m_compte);
+        _compteDepotLecture.CreerCompte(m_compte);
         
         return CreatedAtAction(nameof(ObtenirCompteParId),new{id = m_compte.NumeroCompte}, new CompteModel(m_compte));
     }
@@ -53,7 +56,7 @@ public class CompteController:Controller
         {
             return BadRequest(ModelState);
         }
-        var compteUtilisateur =_compteDepot.ObtenirCompte(p_compteId);
+        var compteUtilisateur =_compteDepotLecture.ObtenirCompte(p_compteId);
 
         if (compteUtilisateur == null)
         {
@@ -64,7 +67,7 @@ public class CompteController:Controller
         _transactionDepot.CreerTransaction(nouvelleTransaction);
         
         compteUtilisateur.ListTransactions.Add(nouvelleTransaction);
-        _compteDepot.MAJCompte(compteUtilisateur);
+        _compteDepotLecture.MAJCompte(compteUtilisateur);
         
         return CreatedAtAction(
             nameof(ObtenirCompteParId),
@@ -82,7 +85,7 @@ public class CompteController:Controller
     [ProducesResponseType(404)]
     public ActionResult<CompteEntite> ObtenirCompteParId(Guid p_id)
     {
-        var compte = _compteDepot.ObtenirCompte(p_id);
+        var compte = _compteDepotLecture.ObtenirCompte(p_id);
         if (compte != null)
         {
             return Ok(compte);
@@ -102,7 +105,7 @@ public class CompteController:Controller
             return BadRequest(ModelState);
         }
         
-        var compteUtilisateur =_compteDepot.ObtenirCompte(p_compteId);
+        var compteUtilisateur =_compteDepotLecture.ObtenirCompte(p_compteId);
         if (compteUtilisateur == null)
         {
             return NotFound("compte introuvable");
@@ -137,13 +140,15 @@ public class CompteController:Controller
             return BadRequest();
         }
         
-        var compteExistant = _compteDepot.ObtenirCompte(p_id);
+        var compteExistant = _compteDepotLecture.ObtenirCompte(p_id);
         if (compteExistant == null)
         {
             return NotFound();
         }
         
-        _compteDepot.MAJCompte(compteExistant);
+        _compteDepotLecture.MAJCompte(compteExistant);
+        Depot_RabbitMQ_SQLServeur
+        
         return NoContent();
     }
     
@@ -161,7 +166,7 @@ public class CompteController:Controller
             return BadRequest(ModelState);
         }
         
-            var compteUtilisateur = _compteDepot.ObtenirCompte(p_compteId);
+            var compteUtilisateur = _compteDepotLecture.ObtenirCompte(p_compteId);
             if (compteUtilisateur == null)
             {
                 return NotFound("compte introuvable");
