@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Entite\Entite.csproj" />
+      <ProjectReference Include="..\ManipulationBL\ManipulationBL.csproj" />
     </ItemGroup>
 
 </Project>

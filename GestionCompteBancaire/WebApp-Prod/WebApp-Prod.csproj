@@ -10,6 +10,7 @@
     <ItemGroup>
       <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\Entite\Entite.csproj" />
+      <ProjectReference Include="..\ManipulationBL\ManipulationBL.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using WebApplication1.Models;
 using DAL;
+using Entite.Manipulations;
 
 
 namespace WebApplication1.Controllers;
@@ -12,16 +13,16 @@ namespace WebApplication1.Controllers;
 [Route("api/compte")]
 public class CompteController:Controller
 {
-    private readonly ICompteDepot _compteDepotLecture;
-    private readonly ITransactionDepot _transactionDepot;
-    private readonly string _rabbitMQHost = "localhost";
+    private readonly ManipulationCompteBLProd _manipulationCompteBlProd;
+    private readonly ManipulationTransactionBLProd _manipulationTransactionBlProd;
     
     public CompteController(
-        ICompteDepot compteDepotLecture, 
-        ITransactionDepot transactionDepot)
+        ManipulationCompteBLProd manipulationCompteBlProd,
+        ManipulationTransactionBLProd manipulationTransactionBlProd
+        )
     {
-        this._compteDepotLecture = compteDepotLecture;
-        this._transactionDepot = transactionDepot;
+      this._manipulationCompteBlProd = manipulationCompteBlProd;
+      this._manipulationTransactionBlProd = manipulationTransactionBlProd;
     }
 
     public IActionResult Index()
@@ -39,10 +40,9 @@ public class CompteController:Controller
         {
             return BadRequest(ModelState);
         }
-        CompteEntite m_compte = p_compte.VerEntite();
-        _compteDepotLecture.CreerCompte(m_compte);
+        _manipulationCompteBlProd.AjouterCompte(p_compte.VerEntite());
         
-        return CreatedAtAction(nameof(ObtenirCompteParId),new{id = m_compte.NumeroCompte}, new CompteModel(m_compte));
+        return CreatedAtAction(nameof(ObtenirCompteParId),new{id = p_compte.NumeroCompte}, p_compte);
     }
     
     [HttpPost("{p_compteId}/transactions")]
@@ -56,18 +56,19 @@ public class CompteController:Controller
         {
             return BadRequest(ModelState);
         }
-        var compteUtilisateur =_compteDepotLecture.ObtenirCompte(p_compteId);
+        var compteUtilisateur =_manipulationCompteBlProd.ObtenirCompte(p_compteId);
 
         if (compteUtilisateur == null)
         {
             return NotFound("compte introuvable");
         }
-
-        TransactionEntite nouvelleTransaction = p_transaction.VersEntite();
-        _transactionDepot.CreerTransaction(nouvelleTransaction);
         
+        TransactionEntite nouvelleTransaction = p_transaction.VersEntite();
+        _manipulationTransactionBlProd.AjouterTransaction(nouvelleTransaction);
+
         compteUtilisateur.ListTransactions.Add(nouvelleTransaction);
-        _compteDepotLecture.MAJCompte(compteUtilisateur);
+            
+        _manipulationCompteBlProd.ModifierCompte(compteUtilisateur);
         
         return CreatedAtAction(
             nameof(ObtenirCompteParId),
@@ -85,7 +86,7 @@ public class CompteController:Controller
     [ProducesResponseType(404)]
     public ActionResult<CompteEntite> ObtenirCompteParId(Guid p_id)
     {
-        var compte = _compteDepotLecture.ObtenirCompte(p_id);
+        var compte = _manipulationCompteBlProd.ObtenirCompte(p_id);
         if (compte != null)
         {
             return Ok(compte);
@@ -105,7 +106,7 @@ public class CompteController:Controller
             return BadRequest(ModelState);
         }
         
-        var compteUtilisateur =_compteDepotLecture.ObtenirCompte(p_compteId);
+        var compteUtilisateur = _manipulationCompteBlProd.ObtenirCompte(p_compteId);
         if (compteUtilisateur == null)
         {
             return NotFound("compte introuvable");
@@ -140,14 +141,13 @@ public class CompteController:Controller
             return BadRequest();
         }
         
-        var compteExistant = _compteDepotLecture.ObtenirCompte(p_id);
+        var compteExistant = _manipulationCompteBlProd.ObtenirCompte(p_id);
         if (compteExistant == null)
         {
             return NotFound();
         }
         
-        _compteDepotLecture.MAJCompte(compteExistant);
-        Depot_RabbitMQ_SQLServeur
+        _manipulationCompteBlProd.ModifierCompte(compteExistant);
         
         return NoContent();
     }
@@ -166,7 +166,7 @@ public class CompteController:Controller
             return BadRequest(ModelState);
         }
         
-            var compteUtilisateur = _compteDepotLecture.ObtenirCompte(p_compteId);
+            var compteUtilisateur = _manipulationCompteBlProd.ObtenirCompte(p_compteId);
             if (compteUtilisateur == null)
             {
                 return NotFound("compte introuvable");
@@ -194,7 +194,7 @@ public class CompteController:Controller
 
             transactionRecherchee.Montant = transactionModifiee.Montant;
 
-            _transactionDepot.MAJTransaction(transactionModifiee);
+            _manipulationTransactionBlProd.ModifierTransaction(transactionModifiee);
 
         return NoContent(); 
     }

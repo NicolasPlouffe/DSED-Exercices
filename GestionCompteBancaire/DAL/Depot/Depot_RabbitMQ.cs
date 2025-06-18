@@ -10,12 +10,12 @@ using IModel = RabbitMQ.Client.IModel;
 namespace DAL;
 using Entite.IDepot;
 
-public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
+public class Depot_RabbitMQ:ICompteDepot,ITransactionDepot,IDisposable
 {
     private readonly IConnection _connection;
     private readonly IModel _channel;
 
-    public Depot_RabbitMQ_SQLServeur(string hostName)
+    public Depot_RabbitMQ(string hostName) 
     {
         var factory = new ConnectionFactory() { HostName = hostName };
         _connection = factory.CreateConnection();
@@ -35,8 +35,15 @@ public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
     public void CreerCompte(CompteEntite p_compte)
     {
         if (p_compte == null){throw new ArgumentNullException("CompteEntite p_compte is null ne sera pas serializer");}
+
+        var envelope = new MessageEnveloppe
+        {
+            Action = "PostCompte",
+            TypeEntite = "Compte",
+            DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_compte))
+        };
         
-        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_compte));
+        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
         
             _channel.BasicPublish(
             exchange:"comptes",
@@ -46,6 +53,8 @@ public class Depot_RabbitMQ_SQLServeur:ICompteDepot,ITransactionDepot
             );
     }
 
+    // Generation de la méthode par IA. 
+    // Bien que non utilisé dans l'exercice, elle est diponible si l'on compte utiliser la file de message pour la metode Get.
     public CompteEntite ObtenirCompte(Guid p_compteId)
     {
         // Creation fil de reponse temporaire
@@ -99,14 +108,22 @@ return compte ?? throw new KeyNotFoundException("Compte non trouvé");
     {
         if (p_compte == null){throw new ArgumentNullException("CompteEntite p_compte is null ne sera pas serializer");}
         
-        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_compte));
+        var envelope = new MessageEnveloppe
+        {
+            Action = "PutCompte",
+            TypeEntite = "Compte",
+            DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_compte))
+        };
+        
+        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
         
         _channel.BasicPublish(
             exchange:"comptes",
             routingKey:"comptes",
             basicProperties:null,
             body:body
-        );    }
+        );   
+    }
     #endregion
     
     #region Transaction
@@ -114,7 +131,13 @@ return compte ?? throw new KeyNotFoundException("Compte non trouvé");
     {
 if (p_transaction == null){throw new ArgumentNullException("TransactionEntite p_transaction is null");}
 
-var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction));
+var envelope = new MessageEnveloppe
+{
+    Action = "PostTransaction",
+    TypeEntite = "Transaction",
+    DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction))
+};
+var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
 
     _channel.BasicPublish(
     exchange:"",
@@ -122,7 +145,8 @@ var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction));
     basicProperties:null,
     body:body);
     }
-
+    // Generation de la méthode par IA. 
+    // Bien que non utilisé dans l'exercice, elle est diponible si l'on compte utiliser la file de message pour la metode Get.
     public TransactionEntite LireTransaction(Guid p_transactionId)
     {
         // Creation fil de reponse temporaire
@@ -206,14 +230,26 @@ var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction));
     {
 
         if (p_transaction == null){throw new ArgumentNullException("TransactionEntite p_transaction is null");}
-
-        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction));
+       
+        var envelope = new MessageEnveloppe
+        {
+            Action = "PutTransaction",
+            TypeEntite = "Transaction",
+            DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction))
+        };
+        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
 
         _channel.BasicPublish(
             exchange:"",
             routingKey:"transactions",
             basicProperties:null,
-            body:body);    }
+            body:body);
+    }
 
     #endregion
+
+    public void Dispose()
+    {
+        _connection.Dispose();
+    }
 }
