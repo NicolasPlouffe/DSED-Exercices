@@ -1,6 +1,6 @@
 using Entite.IDepot;
-
-namespace Entite.Manipulations;
+using Entite;
+namespace ManipulationsBL;
 
 public class ManipulationTransactionBLProd
 {
@@ -44,7 +44,7 @@ public class ManipulationTransactionBLProd
     
     //Uodate Put
 
-    public void ModifierTransaction(TransactionEntite p_Entite)
+   public void ModifierTransaction(TransactionEntite p_Entite)
     {
         this._mTransactionDepotRabbit.MAJTransaction(p_Entite);
     }

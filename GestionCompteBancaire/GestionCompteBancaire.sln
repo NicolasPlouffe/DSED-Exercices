@@ -8,9 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManipulationBL", "Manipulat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Message", "Message\Message.csproj", "{E0FC4C68-D359-4C09-BA59-A5BE4AA5C2CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conso-Prod", "Conso-Prod\Conso-Prod.csproj", "{F069C771-988E-43FE-B156-EB86B9C06980}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraitementCreationsModifications_Conso-Prod", "TraitementCreationsModifications_Conso-Prod\TraitementCreationsModifications_Conso-Prod.csproj", "{F069C771-988E-43FE-B156-EB86B9C06980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conso", "Conso\Conso.csproj", "{BA789BAF-6CE7-45CC-86AB-C9651DC8AB9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraitementLettresMortes_Conso", "TraitementLettresMortes_Conso\TraitementLettresMortes_Conso.csproj", "{BA789BAF-6CE7-45CC-86AB-C9651DC8AB9A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp-Prod", "WebApp-Prod\WebApp-Prod.csproj", "{DD15DDFF-C1D0-4556-ACCA-DD6807008275}"
 EndProject

@@ -1,6 +1,6 @@
 using RabbitMQ.Client;
 
-namespace Entite.Manipulations;
+namespace ManipulationsBL;
 using Entite;
 using Entite.IDepot;
 using DAL;

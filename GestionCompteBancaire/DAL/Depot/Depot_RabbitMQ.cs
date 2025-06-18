@@ -39,7 +39,7 @@ public class Depot_RabbitMQ:ICompteDepot,ITransactionDepot,IDisposable
         var envelope = new MessageEnveloppe
         {
             Action = "PostCompte",
-            TypeEntite = "Compte",
+            TypeEntite = "CompteEntite",
             DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_compte))
         };
         
@@ -111,7 +111,7 @@ return compte ?? throw new KeyNotFoundException("Compte non trouvé");
         var envelope = new MessageEnveloppe
         {
             Action = "PutCompte",
-            TypeEntite = "Compte",
+            TypeEntite = "CompteEntite",
             DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_compte))
         };
         
@@ -134,7 +134,7 @@ if (p_transaction == null){throw new ArgumentNullException("TransactionEntite p_
 var envelope = new MessageEnveloppe
 {
     Action = "PostTransaction",
-    TypeEntite = "Transaction",
+    TypeEntite = "TransactionEntite",
     DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction))
 };
 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
@@ -234,7 +234,7 @@ var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
         var envelope = new MessageEnveloppe
         {
             Action = "PutTransaction",
-            TypeEntite = "Transaction",
+            TypeEntite = "TransactionEntite",
             DataEntiteEncodees = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(p_transaction))
         };
         var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope));
