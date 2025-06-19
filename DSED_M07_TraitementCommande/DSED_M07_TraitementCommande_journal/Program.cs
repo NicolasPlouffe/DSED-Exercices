@@ -9,20 +9,21 @@ namespace DSED_M07_TraitementCommande_journal
     {
         static void Main(string[] args)
         {
-            string[] requetesSujets = { "*.*.lapin", "lent.#" };
+            string[] requetesSujets = { "#" };
+            
             ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
             using (IConnection connection = factory.CreateConnection())
             {
                 using (IModel channel = connection.CreateModel())
                 {
                     channel.ExchangeDeclare(
-                    exchange: "information_animaux",
+                    exchange: "m07-commandes",
                     type: "topic",
                     durable: true,
                     autoDelete: false
                     );
                     channel.QueueDeclare(
-                    "consommateur2",
+                    "m07-journal",
                     durable: false,
                     exclusive: false,
                     autoDelete: false,
@@ -31,8 +32,8 @@ namespace DSED_M07_TraitementCommande_journal
 
                     foreach (var requeteSujet in requetesSujets)
                     {
-                        channel.QueueBind(queue: "consommateur2",
-                        exchange: "information_animaux",
+                        channel.QueueBind(queue: "m07-journal",
+                        exchange: "m07-commandes",
                         routingKey: requeteSujet);
                     }
 
@@ -42,11 +43,13 @@ namespace DSED_M07_TraitementCommande_journal
                         byte[] body = ea.Body.ToArray();
                         string message = Encoding.UTF8.GetString(body);
                         string sujet = ea.RoutingKey;
+                        
+                        string nomFichier = $"{st}"
                         Console.WriteLine($"Message reçu \"{message}\" avec le sujet : {sujet}");
                     };
-                    channel.BasicConsume(queue: "consommateur2",
+                    channel.BasicConsume(queue: "m07-journal",
                     autoAck: true,
-                    consumerTag: "consommateur2",
+                    consumerTag: "m07-journal",
                     consumer: consumateur);
 
                     Console.WriteLine(" Press [enter] to exit.");

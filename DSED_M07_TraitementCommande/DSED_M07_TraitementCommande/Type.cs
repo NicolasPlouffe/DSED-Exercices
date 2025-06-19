@@ -8,7 +8,7 @@ namespace DSED_M07_TraitementCommande_producteur
 {
     public enum Type
     {
-        normal,
-        premium
+        normal = 0 ,
+        premium = 1
     }
 }

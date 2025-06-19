@@ -9,18 +9,21 @@ namespace DSED_M07_TraitementCommande_producteur
     public class Commande
     {
         public Guid NoReferenceCommande { get; set; }
-        public Type TypeEnvoie { get; set; }
+        public string TypeEnvoie { get; set; }
 
         public string NomClient { get; set; }
 
         public List<Article> listArticles { get; set; }
+        
+        public string StatusEnvoie { get; set; }
 
 
-        public Commande(Guid p_commandeId,Type p_type, string p_nomClient, List<Article> p_listeArticles)
+        public Commande(Guid p_commandeId,string p_type, string p_nomClient, List<Article> p_listeArticles)
         {
             this.NoReferenceCommande = p_commandeId;
             this.TypeEnvoie = p_type;
             this.NomClient = p_nomClient;
+            this.StatusEnvoie = "place attente";
             this.listArticles = p_listeArticles;
         }
     }
