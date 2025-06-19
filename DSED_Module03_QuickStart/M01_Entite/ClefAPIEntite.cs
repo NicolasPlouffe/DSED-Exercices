@@ -8,7 +8,7 @@ public class ClefAPIEntite
     {
         this.CleApIfId = cleApIfId;
     }
-
+   
     public override bool Equals(object? obj)
     {
         return base.Equals(obj);

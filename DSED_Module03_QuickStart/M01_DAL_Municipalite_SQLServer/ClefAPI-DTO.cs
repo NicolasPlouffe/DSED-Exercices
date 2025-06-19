@@ -9,11 +9,15 @@ public class ClefAPI_DTO
     [Key]
     public Guid ClefAPIId { get; set; }
 
+    public ClefAPI_DTO()
+    {
+        ;
+    }
     public ClefAPI_DTO(ClefAPIEntite p_clefAPIEntite)
     {
         this.ClefAPIId = p_clefAPIEntite.CleApIfId;
     }
-
+   
     public ClefAPIEntite VersEntite()
     {
         return new ClefAPIEntite(this.ClefAPIId);

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.ComponentModel.DataAnnotations;
 using SRVM = M01_Entite;
 
 namespace M01_DAL_Municipalite_SQLServer
@@ -7,7 +7,8 @@ namespace M01_DAL_Municipalite_SQLServer
     // DTO
     public class MunicipaliteDTO
     {
-        public int MunicipaliteId { get; set; } = 0;
+        [Key]
+        public int MunicipaliteId { get; set; }  = 0;
         public string NomMunicipalite { get; set; } = string.Empty;
         public string? AdresseCourriel { get; set; }
         public string? AdresseWeb { get; set; }
