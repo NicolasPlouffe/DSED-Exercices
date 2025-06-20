@@ -25,7 +25,7 @@ namespace DSED_M07_TraitementCommande_facturation
                     
                     // Declaration de l'echange normalement au niveau de Azure
                     channel.ExchangeDeclare(
-                    exchange: "information_animaux",
+                    exchange: "m07-commandes",
                     type: "topic",
                     durable: true,
                     autoDelete: false
@@ -33,7 +33,7 @@ namespace DSED_M07_TraitementCommande_facturation
                     
                     // Declaration de la file
                     channel.QueueDeclare(
-                    "consommateur2",
+                    "m07-facturation",
                     durable: false,
                     exclusive: false,
                     autoDelete: false,
@@ -43,8 +43,8 @@ namespace DSED_M07_TraitementCommande_facturation
                     // Liaison de la file du présent consommateur avec l'Exchange
                     foreach (var requeteSujet in requetesSujets)
                     {
-                        channel.QueueBind(queue: "consommateur2",
-                        exchange: "information_animaux",
+                        channel.QueueBind(queue: "m07-facturation",
+                        exchange: "m07-commandes",
                         routingKey: requeteSujet);
                     }
                     
@@ -86,9 +86,9 @@ namespace DSED_M07_TraitementCommande_facturation
                         
                         Console.WriteLine($"Facture reçu et enregistré dans le dossier {cheminFichier}");
                     };
-                    channel.BasicConsume(queue: "m07-journal",
+                    channel.BasicConsume(queue: "m07-facturation",
                     autoAck: true,
-                    consumerTag: "m07-journal",
+                    consumerTag: "m07-facturation",
                     consumer: consumateur);
 
                     Console.WriteLine("Press [enter] to exit.");
