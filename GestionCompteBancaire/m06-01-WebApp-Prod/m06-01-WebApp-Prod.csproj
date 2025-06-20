@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>WebApplication1</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\m06-DAL\m06-DAL.csproj" />
+      <ProjectReference Include="..\m06-Entite\m06-Entite.csproj" />
+      <ProjectReference Include="..\m06-ManipulationBL\m06-ManipulationBL.csproj" />
+    </ItemGroup>
+
+</Project>

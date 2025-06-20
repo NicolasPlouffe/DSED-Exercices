@@ -25,7 +25,7 @@ namespace DSED_M07_TraitementCommande_producteur
 
             string[] commande = { "commande" };
 
-            string[] statue = { "place", "attente" };
+            string[] statue = { "placee", "attente" };
 
 
             ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
@@ -78,7 +78,7 @@ namespace DSED_M07_TraitementCommande_producteur
                                              basicProperties: null,
                                              body: body);
 
-                    Console.Out.WriteLine($"Message \"{message}\" dans le sujet {sujet}"); 
+                    Console.Out.WriteLine($"Message \"{message}\" dans le sujet {sujet}"); 
                     
                     Console.Out.WriteLine($"Commande : {nouvellCommande.NoReferenceCommande}");
                     }
