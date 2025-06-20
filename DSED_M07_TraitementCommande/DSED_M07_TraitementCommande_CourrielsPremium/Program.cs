@@ -2,6 +2,8 @@
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
+using System.Text.Json;
+using DSED_M07_TraitementCommande_producteur;
 
 namespace DSED_M07_TraitementCommande_CourrielsPremium
 {
@@ -9,20 +11,20 @@ namespace DSED_M07_TraitementCommande_CourrielsPremium
     {
         static void Main(string[] args)
         {
-            string[] requetesSujets = { "#" };
+            string[] requetesSujets = { "commande.placee.premium" };
             ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
             using (IConnection connection = factory.CreateConnection())
             {
                 using (IModel channel = connection.CreateModel())
                 {
                     channel.ExchangeDeclare(
-                    exchange: "information_animaux",
+                    exchange: "m07-commandes",
                     type: "topic",
                     durable: true,
                     autoDelete: false
                     );
                     channel.QueueDeclare(
-                    "consommateur2",
+                    "m07-courriel-premium",
                     durable: false,
                     exclusive: false,
                     autoDelete: false,
@@ -31,8 +33,8 @@ namespace DSED_M07_TraitementCommande_CourrielsPremium
 
                     foreach (var requeteSujet in requetesSujets)
                     {
-                        channel.QueueBind(queue: "consommateur2",
-                        exchange: "information_animaux",
+                        channel.QueueBind(queue: "m07-courriel-premium",
+                        exchange: "m07-commandes",
                         routingKey: requeteSujet);
                     }
 
@@ -42,11 +44,14 @@ namespace DSED_M07_TraitementCommande_CourrielsPremium
                         byte[] body = ea.Body.ToArray();
                         string message = Encoding.UTF8.GetString(body);
                         string sujet = ea.RoutingKey;
-                        Console.WriteLine($"Message reçu \"{message}\" avec le sujet : {sujet}");
+                        
+                        var objDeserialised = JsonSerializer.Deserialize<Commande>(message);
+                        
+                        Console.WriteLine($"Commande premium : {objDeserialised.NoReferenceCommande}");
                     };
-                    channel.BasicConsume(queue: "consommateur2",
+                    channel.BasicConsume(queue: "m07-courriel-premium",
                     autoAck: true,
-                    consumerTag: "consommateur2",
+                    consumerTag: "m07-courriel-premium",
                     consumer: consumateur);
 
                     Console.WriteLine(" Press [enter] to exit.");
