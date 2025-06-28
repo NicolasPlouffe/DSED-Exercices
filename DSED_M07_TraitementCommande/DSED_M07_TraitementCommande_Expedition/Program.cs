@@ -11,7 +11,7 @@ namespace DSED_M07_TraitementCommande_Expedition
     {
         static void Main(string[] args)
         {
-            string[] requetesSujets = { "commande.placee.*" };
+            string[] requetesSujets = { "commande.place.*" };
             ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
             using (IConnection connection = factory.CreateConnection())
             {
@@ -44,7 +44,7 @@ namespace DSED_M07_TraitementCommande_Expedition
                         byte[] body = ea.Body.ToArray();
                         string message = Encoding.UTF8.GetString(body);
                         string sujet = ea.RoutingKey;
-                        var objDeserialise = JsonSerializer.Deserialize<Commande>(message);
+                        Commande objDeserialise = JsonSerializer.Deserialize<Commande>(message);
                         Console.WriteLine("Préparez les articles suivants : ");
                         foreach (var article in objDeserialise.listArticles)
                         {

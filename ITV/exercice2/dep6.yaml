@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      env: accepted
+  template:
+    metadata:
+      labels:
+        tier: backend
+        env: accepted
+    spec:
+      containers:
+      - name: hello
+        image: nginxdemos/hello

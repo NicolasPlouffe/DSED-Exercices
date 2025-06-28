@@ -25,7 +25,7 @@ namespace DSED_M07_TraitementCommande_producteur
 
             string[] commande = { "commande" };
 
-            string[] statue = { "placee", "attente" };
+            string[] statue = { "place" };
 
 
             ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
@@ -62,17 +62,16 @@ namespace DSED_M07_TraitementCommande_producteur
                             articles.Add(articlesDisponibles[rnd.Next(articlesDisponibles.Count)]);
                         }
                         
-
                         Commande nouvellCommande = new Commande(reference,type,client,articles);
                         
-                    string sujet = $"{commande}.{statue}.{nouvellCommande.TypeEnvoie}";
+                    string sujet = $"commande.place.{nouvellCommande.TypeEnvoie}";
                     string message = $"La {nouvellCommande.NoReferenceCommande}" +
                                      $" est : {nouvellCommande.StatusEnvoie} de type : {nouvellCommande.TypeEnvoie} " +
                                      $"et contiens : {nouvellCommande.listArticles.ToArray()}";
                     
-                    //string json = JsonSerializer.Serialize(nouvellCommande);
+                    string json = JsonSerializer.Serialize(nouvellCommande);
                     
-                    var body = Encoding.UTF8.GetBytes(message);
+                    var body = Encoding.UTF8.GetBytes(json);
                     channel.BasicPublish(exchange: "m07-commandes",
                                              routingKey: sujet,
                                              basicProperties: null,

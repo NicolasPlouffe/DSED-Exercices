@@ -11,7 +11,7 @@ namespace DSED_M07_TraitementCommande_CourrielsPremium
     {
         static void Main(string[] args)
         {
-            string[] requetesSujets = { "commande.placee.premium" };
+            string[] requetesSujets = { "commande.place.premium" };
             ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
             using (IConnection connection = factory.CreateConnection())
             {

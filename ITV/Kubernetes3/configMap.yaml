@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map-exercice3
+data:
+  ma_variable: "Une valeur"
+
+  monfichier.conf: |
+    Une ligne
+    Une autre...
+    C'est un beau fichier de configuration !

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      env: unit
+  template:
+    metadata:
+      labels:
+        tier: backend
+        env: unit
+    spec:
+      containers:
+      - name: hello
+        image: nginxdemos/hello

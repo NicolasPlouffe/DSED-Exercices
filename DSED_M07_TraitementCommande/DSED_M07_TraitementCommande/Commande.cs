@@ -23,7 +23,7 @@ namespace DSED_M07_TraitementCommande_producteur
             this.NoReferenceCommande = p_commandeId;
             this.TypeEnvoie = p_type;
             this.NomClient = p_nomClient;
-            this.StatusEnvoie = "place attente";
+            this.StatusEnvoie = "place";
             this.listArticles = p_listeArticles;
         }
     }

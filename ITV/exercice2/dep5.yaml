@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+      env: accepted
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        env: accepted
+    spec:
+      containers:
+      - name: hello
+        image: nginxdemos/hello

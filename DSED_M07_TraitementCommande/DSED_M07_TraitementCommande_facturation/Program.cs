@@ -60,7 +60,7 @@ namespace DSED_M07_TraitementCommande_facturation
                         string sujet = ea.RoutingKey;
                         
                         //Deserialisation du tableau de bytes en objet
-                        var commandeRecue = JsonSerializer.Deserialize<Commande>(message);
+                        Commande commandeRecue = JsonSerializer.Deserialize<Commande>(message);
                         
                         // Traitement et modification si besoin de l'objet si besoin
                         if (commandeRecue.TypeEnvoie == "premium")
