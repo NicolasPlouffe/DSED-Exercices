@@ -8,13 +8,11 @@ using System.Linq;
 [Route("api/appel")]
 public class AppelController : Controller
 {
-    private readonly List<Appel> _appelsCourrant;
-    private readonly List<Appel> _appelsTerminee;
+    private readonly List<AppelModel> _appels;
 
     public AppelController()
     {
-        _appelsCourrant = new List<Appel>();
-        _appelsTerminee = new List<Appel>();
+        _appels = new List<AppelModel>();
     }
 
     public IActionResult Index()
@@ -26,26 +24,26 @@ public class AppelController : Controller
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public ActionResult<Appel> Post([FromBody] Appel appel )
+    public ActionResult<AppelModel> Post([FromBody] AppelModel appelModel )
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
         Random random = new Random();
-        appel.AgentId = random.Next(0,100);
-        appel.AppelId = random.Next(0,1000);
-        appel.DebutAppel = DateTime.Now;
-        _appelsCourrant.Add(appel);
-        return CreatedAtAction(nameof(GetById), new { id = appel.AppelId }, appel);
+        appelModel.AgentId = random.Next(0,100);
+        appelModel.AppelId = random.Next(0,1000);
+        appelModel.DebutAppel = DateTime.Now;
+        _appels.Add(appelModel);
+        return CreatedAtAction(nameof(GetById), new { id = appelModel.AppelId }, appelModel);
         
     }
         
     // GET - Read
     [HttpGet("{id}")]
-    public ActionResult<Appel> GetById(int id)
+    public ActionResult<AppelModel> GetById(int id)
     {
-        var appel = _appelsCourrant.FirstOrDefault(a =>a.AppelId == id);
+        var appel = _appels.FirstOrDefault(a =>a.AppelId == id);
         if (appel == null)
         {
             return NotFound();
@@ -57,21 +55,19 @@ public class AppelController : Controller
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    public IActionResult Put(int id, [FromBody] Appel p_appel)
+    public IActionResult Put(int id, [FromBody] AppelModel pAppelModel)
     {
-        if (!ModelState.IsValid || p_appel == null)
+        if (!ModelState.IsValid || pAppelModel == null)
         {
             return BadRequest();
         }
-        var appel = _appelsCourrant.FirstOrDefault(a =>a.AppelId == id);
+        var appel = _appels.FirstOrDefault(a =>a.AppelId == id);
         
         if (appel == null)
             {
             return NotFound();
             }
         appel.FinAppel = DateTime.Now;
-        _appelsTerminee.Add(appel);
-        _appelsCourrant.Remove(appel);
         
         return NoContent();
     }

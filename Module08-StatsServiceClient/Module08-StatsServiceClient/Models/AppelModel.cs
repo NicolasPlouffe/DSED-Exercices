@@ -1,6 +1,6 @@
 namespace Module08_StatsServiceClient.Models;
 
-public class Appel
+public class AppelModel
 {
     public int AppelId { get; set; }
     public int AgentId { get; set; }
@@ -8,9 +8,8 @@ public class Appel
     public DateTime? FinAppel { get; set; }
     public TimeSpan? DureeAppel => FinAppel.HasValue ? FinAppel.Value - DebutAppel : null;
 
-    public Appel()
+    public AppelModel()
     {
-        
         this.DebutAppel = DateTime.Now;
     }
 }
