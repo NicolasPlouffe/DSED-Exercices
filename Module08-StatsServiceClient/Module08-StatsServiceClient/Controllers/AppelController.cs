@@ -53,6 +53,28 @@ public class AppelController : Controller
         return appel;
     }
     // PUT - Update
+    [HttpPut("{id}")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(404)]
+    public IActionResult Put(int id, [FromBody] Appel p_appel)
+    {
+        if (!ModelState.IsValid || p_appel == null)
+        {
+            return BadRequest();
+        }
+        var appel = _appelsCourrant.FirstOrDefault(a =>a.AppelId == id);
+        
+        if (appel == null)
+            {
+            return NotFound();
+            }
+        appel.FinAppel = DateTime.Now;
+        _appelsTerminee.Add(appel);
+        _appelsCourrant.Remove(appel);
+        
+        return NoContent();
+    }
     // Delete
     
 }
