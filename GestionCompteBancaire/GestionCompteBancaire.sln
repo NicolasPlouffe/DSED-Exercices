@@ -1,18 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entite", "Entite\Entite.csproj", "{486ADBD5-E760-4467-9E17-D96C40090E24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m06-Entite", "m06-Entite\m06-Entite.csproj", "{486ADBD5-E760-4467-9E17-D96C40090E24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{8EDE2519-87A5-4245-8625-AA0676FB2545}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m06-DAL", "m06-DAL\m06-DAL.csproj", "{8EDE2519-87A5-4245-8625-AA0676FB2545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManipulationBL", "ManipulationBL\ManipulationBL.csproj", "{0790B5F8-2178-4F6C-A905-E0D79D613373}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m06-ManipulationBL", "m06-ManipulationBL\m06-ManipulationBL.csproj", "{0790B5F8-2178-4F6C-A905-E0D79D613373}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Message", "Message\Message.csproj", "{E0FC4C68-D359-4C09-BA59-A5BE4AA5C2CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m06-02-TraitementCreationsModifications_Conso-Prod", "m06-02-TraitementCreationsModifications_Conso-Prod\m06-02-TraitementCreationsModifications_Conso-Prod.csproj", "{F069C771-988E-43FE-B156-EB86B9C06980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraitementCreationsModifications_Conso-Prod", "TraitementCreationsModifications_Conso-Prod\TraitementCreationsModifications_Conso-Prod.csproj", "{F069C771-988E-43FE-B156-EB86B9C06980}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m06-03-TraitementLettresMortes_Conso", "m06-03-TraitementLettresMortes_Conso\m06-03-TraitementLettresMortes_Conso.csproj", "{BA789BAF-6CE7-45CC-86AB-C9651DC8AB9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraitementLettresMortes_Conso", "TraitementLettresMortes_Conso\TraitementLettresMortes_Conso.csproj", "{BA789BAF-6CE7-45CC-86AB-C9651DC8AB9A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp-Prod", "WebApp-Prod\WebApp-Prod.csproj", "{DD15DDFF-C1D0-4556-ACCA-DD6807008275}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m06-01-WebApp-Prod", "m06-01-WebApp-Prod\m06-01-WebApp-Prod.csproj", "{DD15DDFF-C1D0-4556-ACCA-DD6807008275}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +30,6 @@ Global
 		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0790B5F8-2178-4F6C-A905-E0D79D613373}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0FC4C68-D359-4C09-BA59-A5BE4AA5C2CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0FC4C68-D359-4C09-BA59-A5BE4AA5C2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0FC4C68-D359-4C09-BA59-A5BE4AA5C2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0FC4C68-D359-4C09-BA59-A5BE4AA5C2CB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F069C771-988E-43FE-B156-EB86B9C06980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F069C771-988E-43FE-B156-EB86B9C06980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F069C771-988E-43FE-B156-EB86B9C06980}.Release|Any CPU.ActiveCfg = Release|Any CPU
