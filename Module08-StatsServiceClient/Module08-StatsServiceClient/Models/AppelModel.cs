@@ -4,12 +4,17 @@ public class AppelModel
 {
     public int AppelId { get; set; }
     public int AgentId { get; set; }
-    public DateTime DebutAppel { get; set; }
-    public DateTime? FinAppel { get; set; }
-    public TimeSpan? DureeAppel => FinAppel.HasValue ? FinAppel.Value - DebutAppel : null;
+    public DateTime PDebutAppel { get; set; }
+    public DateTime? PFinAppel { get; set; }
+    public TimeSpan? DureeAppel => PFinAppel.HasValue ? PFinAppel.Value - PDebutAppel : null;
 
+    public AppelModel(DateTime p_debutAppel, DateTime p_finAppel)
+    {
+        this.PDebutAppel = p_debutAppel;
+        this.PFinAppel = p_finAppel;
+    }
     public AppelModel()
     {
-        this.DebutAppel = DateTime.Now;
+        this.PDebutAppel = DateTime.Now;
     }
 }

@@ -1,5 +1,5 @@
 using Module08_StatsServiceClient.Models;
-
+using Module08_StatsServiceClient.Services;
 namespace Module08_StatsServiceClient.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -8,11 +8,10 @@ using System.Linq;
 [Route("api/appel")]
 public class AppelController : Controller
 {
-    private readonly List<AppelModel> _appels;
-
-    public AppelController()
+private readonly AppelRepository _appelsRepository;
+    public AppelController(AppelRepository p_appelsRepository)
     {
-        _appels = new List<AppelModel>();
+        _appelsRepository = p_appelsRepository;
     }
 
     public IActionResult Index()
@@ -33,8 +32,8 @@ public class AppelController : Controller
         Random random = new Random();
         appelModel.AgentId = random.Next(0,100);
         appelModel.AppelId = random.Next(0,1000);
-        appelModel.DebutAppel = DateTime.Now;
-        _appels.Add(appelModel);
+        appelModel.PDebutAppel = DateTime.Now;
+        _appelsRepository.Appels.Add(appelModel);
         return CreatedAtAction(nameof(GetById), new { id = appelModel.AppelId }, appelModel);
         
     }
@@ -43,7 +42,7 @@ public class AppelController : Controller
     [HttpGet("{id}")]
     public ActionResult<AppelModel> GetById(int id)
     {
-        var appel = _appels.FirstOrDefault(a =>a.AppelId == id);
+        var appel = _appelsRepository.Appels.FirstOrDefault(a =>a.AppelId == id);
         if (appel == null)
         {
             return NotFound();
@@ -61,13 +60,13 @@ public class AppelController : Controller
         {
             return BadRequest();
         }
-        var appel = _appels.FirstOrDefault(a =>a.AppelId == id);
+        var appel = _appelsRepository.Appels.FirstOrDefault(a =>a.AppelId == id);
         
         if (appel == null)
             {
             return NotFound();
             }
-        appel.FinAppel = DateTime.Now;
+        appel.PFinAppel = DateTime.Now;
         
         return NoContent();
     }
