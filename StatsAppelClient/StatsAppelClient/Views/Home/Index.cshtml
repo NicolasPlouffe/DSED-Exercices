@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+  
+    <h1> Statistiques</h1>
+    <div>
+        <ul>
+            <li id="s1"></li>
+            <li id="s2"></li>
+            <li id="s3"></li>
+        </ul>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script>
+        window.onload = function () {
+        let connexion = new signalR.HubConnectionBuilder().withUrl("/statsAppelHub").build();
+        connexion.start().catch(function (err) {
+        return console.error(err.toString());
+          });
+        }
+
+            const s1 = document.getElementBtId("s1");
+            const s2 = document.getElementBtId("s2");
+            const s3 = document.getElementBtId("s3");
+                      
+             const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/statshub")
+            .build();
+
+            connection.start().catch(function (err){
+
+                return console.error(err.toString();
+        });
+
+       connection.on("Connected", function (dureeMoyenne, nbrAgents, nbrAppelQuotidien) {
+             s1.textContent = `Appel du jour: ${nbrAppelQutodidient}`;
+             s2.textContent = `Durée moyenne par appel: ${dureeMoyenne}`;
+             s3.textContent = `Nombre d'agents présentements en ligne: ${nbrAgents}`;
+
+        });
+
+                
+       
+    </script>
+}
