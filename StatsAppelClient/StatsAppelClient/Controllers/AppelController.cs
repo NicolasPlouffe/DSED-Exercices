@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using StatsAppelClient.Services_BL;
 using StatsAppelClient.Depot;
 using StatsAppelClient.Hubs;
 using StatsAppelClient.Models; 
@@ -12,17 +13,18 @@ namespace StatsAppelClient.Controllers
     {
 
         private readonly AppelDepot _appelsRepository;
-
         private readonly IHubContext<StatsAppelHub> _hubContext;
-
-
-        public AppelController(AppelDepot p_appelsRepository, IHubContext<StatsAppelHub> hubContext)
+        private readonly StatsAppelService _statsAppelService;
+        
+        public AppelController(
+            AppelDepot p_appelsRepository,
+            IHubContext<StatsAppelHub> hubContext, 
+            StatsAppelService p_statsAppelService)
         {
             _appelsRepository = p_appelsRepository;
             _hubContext = hubContext;
+            _statsAppelService = p_statsAppelService;
         }
-
-        
 
         // POST - Create
         [HttpPost]
@@ -39,14 +41,10 @@ namespace StatsAppelClient.Controllers
             appelModel.AppelId = random.Next(0, 1000);
             appelModel.PDebutAppel = DateTime.Now;
             _appelsRepository.Appels.Add(appelModel);
-
-            await _hubContext.Clients.All.SendAsync("Connected",
-                this._appelsRepository.CalculerDureeMoyenneAppels(),
-                this._appelsRepository.CalculerNbrAgentEnLigne(),
-                this._appelsRepository.CalculerNbrAppelJourneeCourrante());
+            
+            await EnvoyerStatistiquesVersVue();
             
             return CreatedAtAction(nameof(GetById), new { id = appelModel.AppelId }, appelModel);
-
         }
 
         // GET - Read
@@ -56,18 +54,18 @@ namespace StatsAppelClient.Controllers
         public ActionResult<AppelModel> GetById(int id)
         {
             var appel = _appelsRepository.Appels.FirstOrDefault(a => a.AppelId == id);
-            if (appel == null)
+            if (appel is null)
             {
                 return NotFound();
             }
             return Ok(appel);
         }
 
-        [HttpGet("stats/nbrAppel")]
+         /*[HttpGet("stats/nbrAppel")]
         [ProducesResponseType(200)]
         public ActionResult GetNbrappelCourrant()
         {
-            return Ok(_appelsRepository.CalculerNbrAppelJourneeCourrante());
+            return Ok(_appelsRepository.CalculerNbrAgentEnLigne());
         }
 
         [HttpGet("stats/dureeMoyenne")]
@@ -81,15 +79,15 @@ namespace StatsAppelClient.Controllers
         [ProducesResponseType(200)]
         public ActionResult GetNbrAppelJourneeCourrante()
         {
-            return Ok(_appelsRepository.CalculerNbrAgentEnLigne());
-        }
+            return Ok(_appelsRepository.CalculerNbrAppelJourneeCourrante());
+        }*/
 
         // PUT - Update
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async IActionResult Put(int id, [FromBody] AppelModel pAppelModel)
+        public async  Task <IActionResult> Put(int id, [FromBody] AppelModel pAppelModel)
         {
             if (!ModelState.IsValid || pAppelModel == null)
             {
@@ -103,9 +101,18 @@ namespace StatsAppelClient.Controllers
             }
             appel.PFinAppel = DateTime.Now;
 
-            await _hubContext.Clients.All.SendAsync("StatistiquesMAJ", GetStatistics());
+            await EnvoyerStatistiquesVersVue();
 
             return NoContent();
+        }
+
+        private async Task EnvoyerStatistiquesVersVue()
+        {
+            await _hubContext.Clients.All.SendAsync("MajStats",
+                _statsAppelService.CalculerDureeMoyenneAppels(),
+                _statsAppelService.CalculerNbrAgentEnLigne(),
+                _statsAppelService.CalculerNbrAppelJourneeCourrante()
+                );
         }
     }
 }

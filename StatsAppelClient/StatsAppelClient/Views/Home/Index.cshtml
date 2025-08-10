@@ -19,33 +19,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script>
         window.onload = function () {
-        let connexion = new signalR.HubConnectionBuilder().withUrl("/statsAppelHub").build();
-        connexion.start().catch(function (err) {
-        return console.error(err.toString());
-          });
-        }
-
-            const s1 = document.getElementBtId("s1");
-            const s2 = document.getElementBtId("s2");
-            const s3 = document.getElementBtId("s3");
+            const s1 = document.getElementById("s1");
+            const s2 = document.getElementById("s2");
+            const s3 = document.getElementById("s3");
                       
              const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/statshub")
+            .withUrl("/statsAppelHub")
             .build();
 
-            connection.start().catch(function (err){
-
-                return console.error(err.toString();
+            connection.start().catch(function (err) {
+                return console.error(err.toString());
         });
 
-       connection.on("Connected", function (dureeMoyenne, nbrAgents, nbrAppelQuotidien) {
+       connection.on("MajStats", function (dureeMoyenne, nbrAgents, nbrAppelQuotidien) {
              s1.textContent = `Appel du jour: ${nbrAppelQutodidient}`;
              s2.textContent = `Durée moyenne par appel: ${dureeMoyenne}`;
              s3.textContent = `Nombre d'agents présentements en ligne: ${nbrAgents}`;
-
-        });
-
-                
-       
+        });                
     </script>
 }

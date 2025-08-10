@@ -1,12 +1,15 @@
 using StatsAppelClient.Depot;
 using StatsAppelClient.Hubs;
+using StatsAppelClient.Services_BL;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<AppelDepot>();
+builder.Services.AddSingleton<StatsAppelService>();
 builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,12 +22,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-app.MapHub<StatsAppelHub>("/statshub");
-
 app.UseAuthorization();
+
+app.MapHub<StatsAppelHub>("/statsAppelHub");
+
 
 app.MapControllerRoute(
     name: "default",

@@ -5,29 +5,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using StatsAppelClient.Depot;
 using Microsoft.AspNetCore.Mvc;
-
+using StatsAppelClient.Services_BL;
 namespace StatsAppelClient.Hubs
 
 {
     public class StatsAppelHub: Hub
     {
-        private AppelDepot _appelDepot;
+        private readonly StatsAppelService _statsAppelService;
        
-        public StatsAppelHub(AppelDepot p_appel)
+        public StatsAppelHub(StatsAppelService p_statsAppelService)
         {
-            this._appelDepot = p_appel;
+            this._statsAppelService = p_statsAppelService;
         }
 
         public async override Task OnConnectedAsync()
         {
-
-            await Clients.Caller.SendAsync("Connected",
-                this._appelDepot.CalculerDureeMoyenneAppels(),
-                this._appelDepot.CalculerNbrAgentEnLigne(),
-                this._appelDepot.CalculerNbrAppelJourneeCourrante());  
+            await Clients.Caller.SendAsync("MajStats",
+                _statsAppelService.CalculerDureeMoyenneAppels(),
+                _statsAppelService.CalculerNbrAgentEnLigne(),
+                _statsAppelService.CalculerNbrAppelJourneeCourrante()
+                );
 
             await base.OnConnectedAsync();
         }
-
     }
 }
